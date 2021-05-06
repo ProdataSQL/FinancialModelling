@@ -3,7 +3,9 @@ For my session in SQL bits on Financial Modelling in PowerBI there are couple of
 
 [![Watch the video](https://youtu.be/vt5fpE0bzSY)
 
+<figure class="video_container">
   <iframe src="https://www.youtube.com/embed/enMumwvLAug" frameborder="0" allowfullscreen="true"> </iframe>
+</figure>
   
 
 
