@@ -1,7 +1,10 @@
 # Financial Modeling with PowerBI
 For my session in SQL bits on Financial Modelling in PowerBI there are couple of useful downloads if you want to follow or dissect at home.
 
-(https://youtu.be/vt5fpE0bzSY)
+[![Watch the video](https://youtu.be/vt5fpE0bzSY)
+
+  <iframe src="https://www.youtube.com/embed/enMumwvLAug" frameborder="0" allowfullscreen="true"> </iframe>
+  
 
 
 
