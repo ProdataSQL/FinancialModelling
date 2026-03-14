@@ -1,0 +1,50 @@
+table 'Product Category'
+	isHidden
+
+	column ProductCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: count
+		sourceColumn: ProductCategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ProductCategoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column EnglishProductCategoryName
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: EnglishProductCategoryName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = EnglishProductCategoryName
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition 'Product Category-84486888-c4c2-48ff-b85f-0a6955e3342f' = query
+		mode: import
+		source
+			query = SELECT * FROM [Product Category]
+			dataSource: 6db4433c-5b90-4ab3-b4f9-04d39526f211
+
+	annotation PBI_Id = b991bdcd-4abd-49e5-bad1-840e22c9775c
+
+	annotation LinkedQueryName = Product Category
+
+	annotation PBI_QueryRelationships = {"columnCount":2,"keyColumnNames":["ProductCategoryKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{ProductCategoryKey,5}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{ProductCategoryKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{EnglishProductCategoryName,2}"],"ColumnCount":2,"KeyColumnNames":["ProductCategoryKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{ProductCategoryKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{EnglishProductCategoryName,2}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{ProductCategoryKey,5}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

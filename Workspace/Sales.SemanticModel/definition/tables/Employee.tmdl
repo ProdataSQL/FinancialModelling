@@ -1,0 +1,366 @@
+table Employee
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = EmployeeKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ParentEmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: count
+		sourceColumn: ParentEmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ParentEmployeeKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'NI Number'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: NI Number
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = NI Number
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesTerritoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column FirstName
+		dataType: string
+		summarizeBy: none
+		sourceColumn: FirstName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = FirstName
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column LastName
+		dataType: string
+		summarizeBy: none
+		sourceColumn: LastName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = LastName
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column MiddleName
+		dataType: string
+		summarizeBy: none
+		sourceColumn: MiddleName
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = MiddleName
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column NameStyle
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		summarizeBy: none
+		sourceColumn: NameStyle
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Boolean" />
+
+		annotation DataTypeAtRefresh = Boolean#####not a type
+
+		annotation PBI_NameAtRefresh = NameStyle
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Title
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Title
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Title
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Hire Date'
+		dataType: dateTime
+		formatString: dddd\, mmmm d\, yyyy
+		summarizeBy: none
+		sourceColumn: Hire Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="LongDate" FormatString="dddd d MMMM yyyy" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####Date
+
+		annotation PBI_NameAtRefresh = Hire Date
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Birth Date'
+		dataType: dateTime
+		formatString: dddd\, mmmm d\, yyyy
+		summarizeBy: none
+		sourceColumn: Birth Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="LongDate" FormatString="dddd d MMMM yyyy" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####Date
+
+		annotation PBI_NameAtRefresh = Birth Date
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Marital Status'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Marital Status
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Marital Status
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalariedFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		summarizeBy: none
+		sourceColumn: SalariedFlag
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Boolean" />
+
+		annotation DataTypeAtRefresh = Boolean#####not a type
+
+		annotation PBI_NameAtRefresh = SalariedFlag
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Gender
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Gender
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Gender
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column PayFrequency
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: PayFrequency
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = PayFrequency
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Base Rate'
+		dataType: decimal
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		summarizeBy: none
+		sourceColumn: Base Rate
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="CurrencyGeneral" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = Base Rate
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column VacationHours
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: VacationHours
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = VacationHours
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SickLeaveHours
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SickLeaveHours
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SickLeaveHours
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CurrentFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		summarizeBy: none
+		sourceColumn: CurrentFlag
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Boolean" />
+
+		annotation DataTypeAtRefresh = Boolean#####not a type
+
+		annotation PBI_NameAtRefresh = CurrentFlag
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesPersonFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		summarizeBy: none
+		sourceColumn: SalesPersonFlag
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Boolean" />
+
+		annotation DataTypeAtRefresh = Boolean#####not a type
+
+		annotation PBI_NameAtRefresh = SalesPersonFlag
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Department
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Department
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Department
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Status
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition Employee-bc6d5ef0-4a14-43fb-9f0a-685843763541 = query
+		mode: import
+		source
+			query = SELECT * FROM [Employee]
+			dataSource: bc1f0cf3-c3ca-4ff7-bd46-90cd8d52a2dd
+
+	annotation PBI_Id = e9a1afdc-eff2-4d88-b0fa-eabcb5c07fce
+
+	annotation LinkedQueryName = Employee
+
+	annotation PBI_QueryRelationships = {"columnCount":23,"keyColumnNames":["EmployeeKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{ParentEmployeeKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":3,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{EmployeeKey,5}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{EmployeeKey,1}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{ParentEmployeeKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeNationalIDAlternateKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesTerritoryKey,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{FirstName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{LastName,6}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{MiddleName,7}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{NameStyle,8}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Title,9}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{HireDate,10}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{BirthDate,11}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{MaritalStatus,15}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalariedFlag,18}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Gender,19}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{PayFrequency,20}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{BaseRate,21}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{VacationHours,22}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SickLeaveHours,23}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{CurrentFlag,24}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesPersonFlag,25}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{DepartmentName,26}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Status,29}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeePhoto,30}"],"ColumnCount":23,"KeyColumnNames":["EmployeeKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{ParentEmployeeKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeNationalIDAlternateKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesTerritoryKey,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{FirstName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{LastName,6}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{MiddleName,7}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{NameStyle,8}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Title,9}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{HireDate,10}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{BirthDate,11}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{MaritalStatus,15}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalariedFlag,18}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Gender,19}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{PayFrequency,20}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{BaseRate,21}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{VacationHours,22}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SickLeaveHours,23}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{CurrentFlag,24}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesPersonFlag,25}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{DepartmentName,26}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{Status,29}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeePhoto,30}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{ParentEmployeeKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":3,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{EmployeeKey,5}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{EmployeeKey,1}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

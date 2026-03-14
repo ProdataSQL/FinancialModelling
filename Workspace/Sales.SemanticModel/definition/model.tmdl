@@ -1,0 +1,24 @@
+model Model
+	culture: en-IE
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.74.5619.862 (19.10)
+
+ref table Product
+ref table 'Product Category'
+ref table Reseller
+ref table 'Reseller Sales'
+ref table Date
+ref table Employee
+ref table Geography
+ref table 'Source Currency'
+ref table FactSalesQuota
+ref table 'Product Subcategory'
+ref table 'Sales Territory'
+ref table ExchangeRates
+ref table Currency
+ref table OpenOrders
+
+ref cultureInfo en-IE
+

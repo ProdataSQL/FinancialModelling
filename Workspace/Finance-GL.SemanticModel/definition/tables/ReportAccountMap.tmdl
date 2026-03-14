@@ -1,0 +1,67 @@
+table ReportAccountMap
+	lineageTag: ee45c0d5-cc35-4daf-aea3-ea0a13419568
+
+	column ReportNo
+		dataType: int64
+		formatString: 0
+		lineageTag: 2a4b4412-4b9d-494e-a22f-8b63da0321aa
+		summarizeBy: none
+		sourceColumn: ReportNo
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ReportNo
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Report
+		dataType: string
+		lineageTag: 17591d0a-3e58-40ab-b34d-aade1f2b14d2
+		summarizeBy: none
+		sourceColumn: Report
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Report
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column AccountKey
+		dataType: int64
+		formatString: 0
+		lineageTag: 4116a320-6a73-48a0-9f44-9d2ecb7784b7
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = AccountKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition ReportAccountMap-7705b288-2899-4e91-b62d-418d02cf2e28 = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Source = AccountRulesCore,
+				    #"Appended Query" = Table.Combine({Source, AccountRulesRSum, AccountRulesCustom})
+				in
+				    #"Appended Query"
+
+	annotation PBI_ResultType = Exception
+
+	annotation PBI_DescriptionAtRefresh
+

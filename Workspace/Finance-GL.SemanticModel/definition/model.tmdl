@@ -1,0 +1,33 @@
+model Model
+	culture: en-IE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Hidden
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Finance GL'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation PBI_QueryOrder = ["General Ledger","Account","Department","Scenario","Organization","Date","Finanical Report","AccountRules","AccountRulesCore","AccountRulesRSum","ReportAccountMap","AccountRulesCustom"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBIDesktopVersion = 2.93.641.0 (21.05)
+
+ref table Account
+ref table 'General Ledger'
+ref table Department
+ref table Scenario
+ref table Organization
+ref table Date
+ref table 'Finanical Report'
+ref table ReportAccountMap
+
+ref cultureInfo en-IE
+

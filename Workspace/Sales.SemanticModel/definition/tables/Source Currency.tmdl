@@ -1,0 +1,64 @@
+table 'Source Currency'
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = CurrencyKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Currency Code'
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Currency Code
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Currency
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Currency
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Currency
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition 'Source Currency-d2491b1f-89f2-4cb2-82b5-89a17400ff17' = query
+		mode: import
+		source
+			query = SELECT * FROM [Source Currency]
+			dataSource: 6c244823-69fd-4558-9ed6-ef5a27654285
+
+	annotation PBI_Id = 2e5f680f-1df3-4922-97f4-195b4e9142e2
+
+	annotation LinkedQueryName = Source Currency
+
+	annotation PBI_QueryRelationships = {"columnCount":3,"keyColumnNames":["CurrencyKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimOrganization.{CurrencyKey,4}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactCurrencyRate.{CurrencyKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{CurrencyKey,6}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{CurrencyKey,7}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyAlternateKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyName,2}"],"ColumnCount":3,"KeyColumnNames":["CurrencyKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyAlternateKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCurrency.{CurrencyName,2}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimOrganization.{CurrencyKey,4}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactCurrencyRate.{CurrencyKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{CurrencyKey,6}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{CurrencyKey,7}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

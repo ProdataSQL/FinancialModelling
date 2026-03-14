@@ -1,0 +1,250 @@
+table Account
+	lineageTag: 192ff249-38e0-47eb-bd72-7379a259e060
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 10cba98e-73b3-4a84-b3cd-04b88bd9b1e1
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = AccountKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ParentAccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fca0efb9-4c7d-4645-9cfb-f98dedd3f9ac
+		summarizeBy: count
+		sourceColumn: ParentAccountKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ParentAccountKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Account Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: c63a8699-6cec-4c0e-a8dd-d659b221c4da
+		summarizeBy: none
+		sourceColumn: Account Code
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = Account Code
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Account
+		dataType: string
+		lineageTag: e75c9ee1-91ea-4efc-bf84-d43e322c5eb5
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Account
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Account Type'
+		dataType: string
+		lineageTag: 1b27fd86-0263-44de-818c-aeaaf72e1fdc
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Account Type
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Operator
+		dataType: string
+		lineageTag: cd60858c-7c0c-403a-a675-48ab2f2ab8e3
+		summarizeBy: none
+		sourceColumn: Operator
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Operator
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CustomMembers
+		dataType: string
+		isHidden
+		lineageTag: eb3a353f-8abf-4195-b38b-ff46733ea616
+		summarizeBy: none
+		sourceColumn: CustomMembers
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = CustomMembers
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Value Type'
+		dataType: string
+		lineageTag: 0a99a88e-03b2-4768-9222-1b021877edd7
+		summarizeBy: none
+		sourceColumn: Value Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Value Type
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CustomMemberOptions
+		dataType: string
+		isHidden
+		lineageTag: 21650d13-622e-43f5-9195-29bf93fef8e4
+		summarizeBy: none
+		sourceColumn: CustomMemberOptions
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = CustomMemberOptions
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column AccountPath = path(Account[AccountKey], Account[ParentAccountKey] )
+		isHidden
+		lineageTag: c49d3877-3691-4734-8b2f-c8c33faa5050
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column Report = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 1,INTEGER))
+		isHidden
+		lineageTag: 213548ed-2dbf-4fa6-8733-7558c6fd2810
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column 'Account L2' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 2,INTEGER))
+		isHidden
+		lineageTag: 2ca09e0a-5d99-4139-8964-1b420ad62325
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column 'Account L3' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 3,INTEGER))
+		isHidden
+		lineageTag: af0dbfa1-91ea-4dd2-b861-52a63eee391f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column 'Account L4' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 4,INTEGER))
+		isHidden
+		lineageTag: 89c34fff-e282-4e0b-b53c-29ea44d6384e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column 'Account L5' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 5,INTEGER))
+		isHidden
+		lineageTag: c0ba61ff-0ba8-4725-82a1-55e329831584
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	column 'Account L6' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 6,INTEGER))
+		isHidden
+		lineageTag: 7713f763-3f67-4ac0-9579-82bcecca8204
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+	partition Account-f1b39765-9b25-4192-a248-07893818c1f2 = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				     dbo_DimAccount= Sql.Database("prd-sql.roebuck.local", "adventureworksdw", [Query="SELECT * FROM DimAccount"]),
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimAccount,{{"AccountCodeAlternateKey", "Account Code"}, {"AccountDescription", "Account Name"}, {"AccountType", "Account Type"}, {"ParentAccountCodeAlternateKey", "Parent Account Code"}, {"ValueType", "Value Type"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"Parent Account Code"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"Account Name", "Account"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns1",{{"AccountKey", Int64.Type}, {"ParentAccountKey", Int64.Type}, {"Account Code", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Account
+
+	annotation PBI_DescriptionAtRefresh
+

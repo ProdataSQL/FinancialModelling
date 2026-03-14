@@ -1,0 +1,135 @@
+table Geography
+
+	column GeographyKey
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: GeographyKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = GeographyKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column City
+		dataType: string
+		summarizeBy: none
+		sourceColumn: City
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = City
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'State Code'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: State Code
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = State Code
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column State
+		dataType: string
+		summarizeBy: none
+		sourceColumn: State
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = State
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Country Code'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Country Code
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Country Code
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Country
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Country
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesTerritoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	hierarchy 'Country State City'
+
+		level Country
+			column: Country
+
+		level State
+			column: State
+
+		level City
+			column: City
+
+	partition Geography-3addee3b-d741-49b8-b7af-79b3a0bb3ee8 = query
+		mode: import
+		source
+			query = SELECT * FROM [Geography]
+			dataSource: 1d18691b-5030-4992-89fc-0f21fe0666cd
+
+	annotation PBI_Id = fa08129c-099b-4f0d-8f00-7cdbe85fbc45
+
+	annotation LinkedQueryName = Geography
+
+	annotation PBI_QueryRelationships = {"columnCount":7,"keyColumnNames":["GeographyKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCustomer.{GeographyKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimReseller.{GeographyKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":6,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{GeographyKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{City,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{StateProvinceCode,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{StateProvinceName,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{CountryRegionCode,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{EnglishCountryRegionName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{SalesTerritoryKey,9}"],"ColumnCount":7,"KeyColumnNames":["GeographyKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{GeographyKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{City,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{StateProvinceCode,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{StateProvinceName,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{CountryRegionCode,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{EnglishCountryRegionName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{SalesTerritoryKey,9}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimCustomer.{GeographyKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimReseller.{GeographyKey,1}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":6,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

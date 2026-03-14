@@ -1,0 +1,128 @@
+table FactSalesQuota
+
+	column SalesQuotaKey
+		dataType: int64
+		formatString: 0
+		summarizeBy: count
+		sourceColumn: SalesQuotaKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesQuotaKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column EmployeeKey
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = EmployeeKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column DateKey
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = DateKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CalendarYear
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: CalendarYear
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = CalendarYear
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CalendarQuarter
+		dataType: int64
+		formatString: 0
+		summarizeBy: sum
+		sourceColumn: CalendarQuarter
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = CalendarQuarter
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesAmountQuota
+		dataType: decimal
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		summarizeBy: sum
+		sourceColumn: SalesAmountQuota
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="CurrencyGeneral" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = SalesAmountQuota
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Date
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation PBI_NameAtRefresh = Date
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition FactSalesQuota-ca735121-29d1-4f4a-a0fa-0c5200a1cc29 = query
+		mode: import
+		source
+			query = SELECT * FROM [FactSalesQuota]
+			dataSource: 87c5cb39-f3e5-45dc-8491-2e8556aef0af
+
+	annotation PBI_Id = b62bcba1-27c6-4615-8da2-eef752fcf429
+
+	annotation LinkedQueryName = FactSalesQuota
+
+	annotation PBI_QueryRelationships = {"columnCount":7,"keyColumnNames":["SalesQuotaKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimDate.{DateKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{SalesQuotaKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{EmployeeKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{DateKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{CalendarYear,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{CalendarQuarter,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{SalesAmountQuota,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{Date,6}"],"ColumnCount":7,"KeyColumnNames":["SalesQuotaKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{SalesQuotaKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{EmployeeKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{DateKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{CalendarYear,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{CalendarQuarter,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{SalesAmountQuota,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactSalesQuota.{Date,6}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimDate.{DateKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":1,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{EmployeeKey,0}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+
