@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "Warehouse",
+    "displayName": "AdventureWorksDW",
+    "description": ""
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "5b61a394-f8f3-8e5c-4706-9646d126a909"
+  }
+}
