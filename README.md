@@ -1,24 +1,46 @@
-# Financial Modeling with PowerBI
-For my session in SQL bits on Financial Modelling in PowerBI there are couple of useful downloads if you want to follow or dissect at home.
+# Financial Modelling with Power BI (2026)
 
-https://events.sqlbits.com/2023/agenda
+Welcome to our updated sample site for Financial Modelling with Power BI.
 
-* Updated 12/03/2023 PowerBI PBIX with P&L, Balance Sheet and Cash Flow from AdventureWorks
-https://github.com/ProdataSQL/FinancialModelling/blob/main/downloads/03.%20Financial%20Reports.pbix
+This repos contains some of out widely adopted design patterns for Enterprise Financial Modelling 
+in PowerBI
 
-* AdventureWorksDW2017 
-This data warehouse has an albeit basic data warehouse version of an accounting table and Account Dimension, so good to use as a demo and starting point.<BR>
-https://github.com/Microsoft/sql-server-samples/releases/download/adventureworks/AdventureWorks2017.bak
+You can either download content here or cloen the repos and link it to a Workspace in Power BI.
+If you have a large/complex project and want help with the modelling you can also contact as at 
+(info@prodata.ie)
 
-* PowerBI Report using “Parent Child” Chart of Accounts
-https://github.com/ProdataSQL/FinancialModelling/blob/main/downloads/Archive/01_P%26L_ParentChild.pbix
+## Contents
 
-* Sample Files to import into PowerBI with General Ledger and Transactions
-https://github.com/ProdataSQL/FinancialModelling/tree/main/downloads/Files
+- **Sample Power BI PBIP with P&L, BS and CF**  
+  [Finance-GL.pbip](./Workspace/Finance-GL.pbip)
 
-* Sample Business Rules spreadsheet for mapping GL Codes to reports
-https://github.com/ProdataSQL/FinancialModelling/blob/main/downloads/Archive/glRules.xlsx
+- **Sample files to import into Power BI (General Ledger & Transactions)**  
+  [Files Folder](./Files)
 
-Feel free to download. I've already had people confirm thye got this desing pattern working on a good few popular ERPs like SAP, M3, Dyanmics
+- **Sample business rules spreadsheet (GL → Statement mapping)**  
+  [Statement.xlsx](./Files/Statement.xlsx)
+
+- **V1 Content using the Statement Bridge (2016–2025)**  
+  [V1 Folder](./V1)
+
+---
+
+## SQLBits Session (V1 Design)
+Want to see the original design pattern in action?
+[![SQLBits Power BI Financial Modelling Session](./image.png)](https://www.youtube.com/watch?v=hoGI1iNb9k0)
+🎥 [Watch the SQLBits session](https://www.youtube.com/watch?v=hoGI1iNb9k0)
+
+This session walks through the **Statement Bridge approach (V1)** and the thinking behind the model.
 
 
+## Cashflow Reporting (V1)
+[![Cashflow Reporting for the Enterprise](image-1.png)](https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
+🎥 [Watch the video on Cashflow Reporting](https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
+
+---
+Feel free to download and explore.
+
+This design pattern has already been proven across multiple ERPs, including:
+- SAP  
+- M3  
+- Dynamics  

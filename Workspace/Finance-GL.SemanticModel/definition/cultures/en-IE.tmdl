@@ -1,0 +1,185 @@
+cultureInfo en-IE
+
+	linguisticMetadata =
+			{
+			  "Version": "2.0.0",
+			  "Language": "en-US",
+			  "Entities": {
+			    "general_ledger.actual": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Actual"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Actual": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.gl_budget": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "GL Budget"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "general_ledger.gl_variance": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "GL Variance"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "general_ledger.gl_variance1": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "GL Variance%"
+			        }
+			      },
+			      "State": "Generated"
+			    },
+			    "general_ledger.actual_py": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Actual PY"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "PY": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.actual_py_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Actual PY Var"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "PY Var": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.actual_py_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Actual PY Var %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "PY Var %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.forecast_111": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Forecast 1+11"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Forecast 1+11": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.forecast_111_var": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Forecast 1+11 Var"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Forecast 1+11 Var": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    },
+			    "general_ledger.forecast_111_var_": {
+			      "Definition": {
+			        "Binding": {
+			          "ConceptualEntity": "General Ledger",
+			          "ConceptualProperty": "Forecast 1+11 Var %"
+			        }
+			      },
+			      "State": "Generated",
+			      "Terms": [
+			        {
+			          "Forecast 1+11 Var %": {
+			            "State": "Suggested",
+			            "Source": {
+			              "Type": "External",
+			              "Agent": "PowerBI.VisualColumnRename"
+			            },
+			            "Weight": 0.9
+			          }
+			        }
+			      ]
+			    }
+			  }
+			}
+		contentType: json
+

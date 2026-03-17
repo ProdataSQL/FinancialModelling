@@ -1,0 +1,169 @@
+table Metrics
+	lineageTag: cfcba5aa-5480-4da0-9d74-8641a6f7ba78
+
+	column Metric
+		dataType: string
+		lineageTag: dd23cb19-bcc1-48dd-8687-503ccf178bc9
+		summarizeBy: none
+		sourceColumn: Metric
+		sortByColumn: 'Metric ID'
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 1'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: b5dd3c1f-bd1d-45bc-9214-496ccd8fda47
+		summarizeBy: none
+		sourceColumn: Level 1
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 2'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: dd0076e8-b652-4674-97ef-ef0b1e5ee20a
+		summarizeBy: none
+		sourceColumn: Level 2
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 3'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: 6d61013d-02dd-4def-bd75-4692c5af7d89
+		summarizeBy: none
+		sourceColumn: Level 3
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 4'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: 85bb8d79-59c1-403f-b490-07773540010b
+		summarizeBy: none
+		sourceColumn: Level 4
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 5'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: 04cf3936-8bf3-4101-964f-f870b40f8491
+		summarizeBy: none
+		sourceColumn: Level 5
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Level 6'
+		dataType: string
+		displayFolder: _Other
+		lineageTag: 11a14571-6439-47fe-9f56-c21a71c83e6d
+		summarizeBy: none
+		sourceColumn: Level 6
+
+		annotation SummarizationSetBy = Automatic
+
+	column Element
+		dataType: string
+		lineageTag: cdec084b-1b1c-488c-a078-578f72ae4023
+		summarizeBy: none
+		sourceColumn: Element
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		formatString: 0
+		displayFolder: _Other
+		lineageTag: 886d53c4-a871-4bf7-80f6-077ee465f08b
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Element Signage'
+		dataType: int64
+		formatString: 0
+		displayFolder: _Other
+		lineageTag: 0d251ffc-39dc-417d-b129-b43f9db23e2d
+		summarizeBy: sum
+		sourceColumn: Element Signage
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b7e7a523-1be5-46b2-b74c-21333379f7c2
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric ID'
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: eec2a61d-438a-4094-92c7-868efa62dcf2
+		summarizeBy: none
+		sourceColumn: Metric ID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric Type'
+		dataType: string
+		lineageTag: 302f39f2-166d-4b35-82d6-410a91fd057e
+		summarizeBy: none
+		sourceColumn: Metric Type
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Levels
+		lineageTag: 817215e0-6f33-4b38-b948-cd45c5967e02
+
+		level 'Level 1'
+			lineageTag: 60f73d9e-284f-44f8-aba0-e80e34c23832
+			column: 'Level 1'
+
+		level 'Level 2'
+			lineageTag: 12c5822b-5d6e-4538-9319-36017a8c60d3
+			column: 'Level 2'
+
+		level 'Level 3'
+			lineageTag: bee00c96-75a4-40e1-b386-6740389d05d5
+			column: 'Level 3'
+
+		level 'Level 4'
+			lineageTag: 42ee8da4-28a9-4037-99e3-0bc8e3e86ae5
+			column: 'Level 4'
+
+		level 'Level 5'
+			lineageTag: 2a0f7c93-847f-4454-bd2a-dcda5469709f
+			column: 'Level 5'
+
+		level 'Level 6'
+			lineageTag: 4156d06d-a99f-4c8f-a936-de3e2ab47635
+			column: 'Level 6'
+
+	partition Metrics = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Source = #"Stastement-Hierarchy",
+				    #"Reordered Columns" = Table.ReorderColumns(Source,{"Metric ID", "Metric", "Metric Type", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Element", "Ordinal", "Element Signage", "AccountKey"})
+				in
+				    #"Reordered Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

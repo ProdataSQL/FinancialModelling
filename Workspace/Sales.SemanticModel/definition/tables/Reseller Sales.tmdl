@@ -1,0 +1,569 @@
+table 'Reseller Sales'
+
+	measure 'Order Qty' = sum('Reseller Sales'[OrderQuantity])
+		formatString: #,0
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" ThousandSeparator="True" />
+
+	measure 'Total Cost' = sum('Reseller Sales'[TotalProductCost])
+		formatString: "€"#,0.00;-"€"#,0.00;"€"#,0.00
+
+		annotation Format = <Format Format="CurrencyCustom" Accuracy="2" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+	measure 'Freight Amount' = sum('Reseller Sales'[Freight])
+		formatString: "€"#,0.00;-"€"#,0.00;"€"#,0.00
+
+		annotation Format = <Format Format="CurrencyCustom" Accuracy="2" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+	measure 'Sales Amount' = sum('Reseller Sales'[SalesAmount])
+		formatString: #,0.00
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+	measure Margin = [Sales Amount] - [Total Cost]
+		formatString: "€"#,0.0;-"€"#,0.0;"€"#,0.0
+
+		annotation Format = <Format Format="CurrencyCustom" Accuracy="1" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+	measure 'Sales Amount EUR' =
+			SUMX ( 'Reseller Sales',
+			        'Reseller Sales'[SalesAmount] * 'Reseller Sales'[EuroER])
+		formatString: #,0.00
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+	measure 'Row Count' = COUNTROWS('Reseller Sales')
+		formatString: #,0
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" ThousandSeparator="True" />
+
+	measure 'Open Orders' = DISTINCTCOUNT(OpenOrders[SalesOrderNumber])
+		formatString: #,0
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="0" ThousandSeparator="True" />
+
+	measure 'Sales Amount USD' =
+			SUMX ( 'Reseller Sales',
+			        'Reseller Sales'[SalesAmount] * 'Reseller Sales'[DollarER])
+		formatString: #,0.00
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+	measure Orders = DISTINCTCOUNT('Reseller Sales'[SalesOrderNumber])
+		formatString: #,0
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" ThousandSeparator="True" />
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ProductKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column DueDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: DueDateKey
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = DueDateKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ShipDateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ShipDateKey
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ShipDateKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ResellerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ResellerKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ResellerKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column EmployeeKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: EmployeeKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = EmployeeKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column PromotionKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: count
+		sourceColumn: PromotionKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = PromotionKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = CurrencyKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesTerritoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesOrderNumber
+		dataType: string
+		summarizeBy: none
+		sourceColumn: SalesOrderNumber
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = SalesOrderNumber
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesOrderLineNumber
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SalesOrderLineNumber
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesOrderLineNumber
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column RevisionNumber
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: RevisionNumber
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = RevisionNumber
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column OrderQuantity
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: OrderQuantity
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = OrderQuantity
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column UnitPrice
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: UnitPrice
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = UnitPrice
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ExtendedAmount
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: ExtendedAmount
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = ExtendedAmount
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column UnitPriceDiscountPct
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: UnitPriceDiscountPct
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="General" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+		annotation PBI_NameAtRefresh = UnitPriceDiscountPct
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column DiscountAmount
+		dataType: double
+		isHidden
+		summarizeBy: none
+		sourceColumn: DiscountAmount
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="General" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+		annotation PBI_NameAtRefresh = DiscountAmount
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ProductStandardCost
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: ProductStandardCost
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = ProductStandardCost
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column TotalProductCost
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: TotalProductCost
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = TotalProductCost
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SalesAmount
+		dataType: double
+		isHidden
+		formatString: #,0.00
+		summarizeBy: sum
+		sourceColumn: SalesAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+		annotation PBI_NameAtRefresh = SalesAmount
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column TaxAmt
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: TaxAmt
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = TaxAmt
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Freight
+		dataType: decimal
+		isHidden
+		formatString: #,0.00
+		summarizeBy: none
+		sourceColumn: Freight
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberDecimal" Accuracy="2" ThousandSeparator="True" />
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = Freight
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CarrierTrackingNumber
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CarrierTrackingNumber
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = CarrierTrackingNumber
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column CustomerPONumber
+		dataType: string
+		summarizeBy: none
+		sourceColumn: CustomerPONumber
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = CustomerPONumber
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column OrderDate
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation PBI_NameAtRefresh = OrderDate
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column DueDate
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: DueDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation PBI_NameAtRefresh = DueDate
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ShipDate
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: ShipDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation PBI_NameAtRefresh = ShipDate
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column OrderDateKey
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: OrderDateKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = OrderDateKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column EuroER =
+			IF (
+			                    ISBLANK (
+			                        LOOKUPVALUE (
+			                            ExchangeRates[AverageRate],
+			                            ExchangeRates[Date], DATE ( YEAR ( 'Reseller Sales'[OrderDate] ), MONTH ( 'Reseller Sales'[OrderDate] ), 1 ),
+			                            ExchangeRates[CurrencyKey], LOOKUPVALUE ( 'Currency'[CurrencyKey], 'Currency'[Currency Code], "EUR" )
+			                        )
+			                    ),
+			                    CALCULATE (
+			                        AVERAGE ( ExchangeRates[AverageRate] ),
+			                        'Currency'[Currency Code] = "EUR",
+			                        ALL ( 'Date' )
+			                    ),
+			                    LOOKUPVALUE (
+			                        ExchangeRates[AverageRate],
+			                        ExchangeRates[Date], DATE ( YEAR ( 'Reseller Sales'[OrderDate] ), MONTH ( 'Reseller Sales'[OrderDate] ), 1 ),
+			                        ExchangeRates[CurrencyKey], LOOKUPVALUE ( 'Currency'[CurrencyKey], 'Currency'[Currency Code], "EUR" )
+			                    )
+			                )
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="General" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+	column DollarER =
+			IF (
+			                    ISBLANK (
+			                        LOOKUPVALUE (
+			                            ExchangeRates[AverageRate],
+			                            ExchangeRates[Date], DATE ( YEAR ( 'Reseller Sales'[OrderDate] ), MONTH ( 'Reseller Sales'[OrderDate] ), 1 ),
+			                            ExchangeRates[CurrencyKey], LOOKUPVALUE ( 'Currency'[CurrencyKey], 'Currency'[Currency Code], "USD" )
+			                        )
+			                    ),
+			                    CALCULATE (
+			                        AVERAGE ( ExchangeRates[AverageRate] ),
+			                        'Currency'[Currency Code] = "EUR",
+			                        ALL ( 'Date' )
+			                    ),
+			                    LOOKUPVALUE (
+			                        ExchangeRates[AverageRate],
+			                        ExchangeRates[Date], DATE ( YEAR ( 'Reseller Sales'[OrderDate] ), MONTH ( 'Reseller Sales'[OrderDate] ), 1 ),
+			                        ExchangeRates[CurrencyKey], LOOKUPVALUE ( 'Currency'[CurrencyKey], 'Currency'[Currency Code], "USD" )
+			                    )
+			                )
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="General" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+	partition 'Reseller Sales-3673d908-4af2-4d38-8d97-ca4d27c14ec1' = query
+		mode: import
+		source
+			query = SELECT * FROM [Reseller Sales]
+			dataSource: 2a807309-5fc3-4a1f-a8b6-5b62ce6c139c
+
+	annotation PBI_Id = 763f4d23-1e3a-46bd-a461-ed64df556b38
+
+	annotation LinkedQueryName = Reseller Sales
+
+	annotation PBI_NavigationStepName = Navigation
+

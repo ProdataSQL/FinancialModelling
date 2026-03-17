@@ -1,0 +1,78 @@
+table 'Sales Territory'
+
+	column SalesTerritoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SalesTerritoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SalesTerritoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Sales Territory'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Sales Territory
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Sales Territory
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Sales Territory Country'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Sales Territory Country
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Sales Territory Country
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Sales Territory Group'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Sales Territory Group
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Sales Territory Group
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	partition 'Sales Territory-d892c1d0-5fb8-4aaf-9695-756161b148bf' = query
+		mode: import
+		source
+			query = SELECT * FROM [Sales Territory]
+			dataSource: 0cb5417f-1a0a-4696-8fe6-aeb75ca96025
+
+	annotation PBI_Id = 68148163-81ff-4436-95b5-7829e930c9bd
+
+	annotation LinkedQueryName = Sales Territory
+
+	annotation PBI_QueryRelationships = {"columnCount":5,"keyColumnNames":["SalesTerritoryKey"],"queryRelationships":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesTerritoryKey,4}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{SalesTerritoryKey,9}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{SalesTerritoryKey,7}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{SalesTerritoryKey,8}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryRegion,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryCountry,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryGroup,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryImage,5}"],"ColumnCount":5,"KeyColumnNames":["SalesTerritoryKey"],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryRegion,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryCountry,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryGroup,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimSalesTerritory.{SalesTerritoryImage,5}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimEmployee.{SalesTerritoryKey,4}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimGeography.{SalesTerritoryKey,9}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{SalesTerritoryKey,7}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{SalesTerritoryKey,8}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

@@ -1,0 +1,134 @@
+table Organization
+	lineageTag: 0908758c-15c2-4c28-a709-23ba653ef7e9
+
+	column OrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 7ce7ebeb-c060-453f-9e88-677682fc7442
+		summarizeBy: none
+		sourceColumn: OrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentOrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 633481cd-6da9-4983-b69e-2596a60d53d2
+		summarizeBy: none
+		sourceColumn: ParentOrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PercentageOfOwnership
+		dataType: double
+		isHidden
+		lineageTag: c04f6f03-e71f-4e64-9a2c-511fc5aa2c5e
+		summarizeBy: none
+		sourceColumn: PercentageOfOwnership
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Organization Name'
+		dataType: string
+		lineageTag: 9c968045-a17e-41eb-8e46-0fa30fea0513
+		summarizeBy: none
+		sourceColumn: Organization Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: aac3251c-8bbe-4311-bff5-7ffc8a2bdb30
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganizationPath = path(Organization[OrganizationKey], Organization[ParentOrganizationKey])
+		isHidden
+		lineageTag: 784c2216-530b-477d-bf39-563133b37b10
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Organization Path Length' = PATHLENGTH( Organization[OrganizationPath] )
+		formatString: 0
+		lineageTag: 5ccecd9e-787a-45cd-97ac-28b4d9f2bf46
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 1,INTEGER))
+		lineageTag: f97c577c-f63a-4d2f-8fb6-4c58ed93ccc6
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Region = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 2,INTEGER))
+		lineageTag: 96083335-c805-4fe0-bb87-13474e24e6c1
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Country = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 3,INTEGER))
+		lineageTag: c3ce3fa7-f7d9-43fc-9ada-a4c55659f3ef
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Organization L4' = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 4,INTEGER))
+		lineageTag: 8b4c3b8b-5c76-4b2b-8559-421977a27152
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Organization
+		lineageTag: 9f6c7424-d66b-45dc-807f-1b71585a8784
+
+		level Company
+			lineageTag: 0f052578-474a-4268-bc6a-7b617b44e327
+			column: Company
+
+		level Region
+			lineageTag: 3fe7cf1e-af77-448e-8e23-6e33bd75dfbd
+			column: Region
+
+		level Country
+			lineageTag: 210981d6-85a8-4722-87ce-a1aa5d74892d
+			column: Country
+
+		level Division
+			lineageTag: 148984eb-cebb-4a5c-850f-13cc08a5026c
+			column: 'Organization L4'
+
+	partition Organization-d9ef92dd-2885-427f-bb6c-29b8742818b8 = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Workbook= Excel.Workbook(File.Contents(Files & "Organisation.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    dbo_DimOrganization= Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimOrganization,{{"OrganizationName", "Organization Name"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"OrganizationKey", Int64.Type}, {"ParentOrganizationKey", Int64.Type}, {"PercentageOfOwnership", type number}, {"CurrencyKey", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

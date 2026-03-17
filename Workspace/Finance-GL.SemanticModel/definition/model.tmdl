@@ -1,0 +1,39 @@
+model Model
+	culture: en-IE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-IE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup Hidden
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Finance GL'
+
+	annotation PBI_QueryGroupOrder = 1
+
+annotation PBI_QueryOrder = ["General Ledger","Account","Department","Scenario","Organization","Date","Statement","Metrics","Files","Statement-Elements","Stastement-Metric","Stastement-Hierarchy","Unique Metrics"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["DevMode"]
+
+ref table Account
+ref table 'General Ledger'
+ref table Department
+ref table Scenario
+ref table Organization
+ref table Date
+ref table Statement
+ref table 'Time Intelligence'
+ref table '_FP P&L Columns'
+ref table Metrics
+ref table 'Display Unit'
+
+ref cultureInfo en-IE
+

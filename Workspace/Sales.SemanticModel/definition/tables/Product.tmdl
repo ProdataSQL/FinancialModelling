@@ -1,0 +1,433 @@
+table Product
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ProductKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Product No'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Product No
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Product No
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ProductSubcategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: ProductSubcategoryKey
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = ProductSubcategoryKey
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Weight UoM'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Weight UoM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Weight UoM
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Size UoM'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Size UoM
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Size UoM
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Product Name'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Product Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Product Name
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Product Unit Cost'
+		dataType: decimal
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		summarizeBy: none
+		sourceColumn: Product Unit Cost
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="CurrencyGeneral" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = Product Unit Cost
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column FinishedGoodsFlag
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		summarizeBy: none
+		sourceColumn: FinishedGoodsFlag
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Boolean" />
+
+		annotation DataTypeAtRefresh = Boolean#####not a type
+
+		annotation PBI_NameAtRefresh = FinishedGoodsFlag
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Color
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Color
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Color
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column SafetyStockLevel
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: SafetyStockLevel
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = SafetyStockLevel
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Reorder Point'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Reorder Point
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = Reorder Point
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ListPrice
+		dataType: decimal
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		summarizeBy: none
+		sourceColumn: ListPrice
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="CurrencyGeneral" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = ListPrice
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Size
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Size
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Size
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Size Range'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Size Range
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Size Range
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Weight
+		dataType: double
+		summarizeBy: none
+		sourceColumn: Weight
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="General" />
+
+		annotation DataTypeAtRefresh = Double#####not a type
+
+		annotation PBI_NameAtRefresh = Weight
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Days To Manufacture'
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+		sourceColumn: Days To Manufacture
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
+
+		annotation DataTypeAtRefresh = Int64#####not a type
+
+		annotation PBI_NameAtRefresh = Days To Manufacture
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column ProductLine
+		dataType: string
+		summarizeBy: none
+		sourceColumn: ProductLine
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = ProductLine
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column DealerPrice
+		dataType: decimal
+		isHidden
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		summarizeBy: none
+		sourceColumn: DealerPrice
+
+		annotation SummarizationSetBy = User
+
+		annotation Format = <Format Format="CurrencyGeneral" ThousandSeparator="True"><Currency LCID="6153" DisplayName="€ English (Ireland)" Symbol="€" PositivePattern="0" NegativePattern="1" /></Format>
+
+		annotation DataTypeAtRefresh = Decimal#####not a type
+
+		annotation PBI_NameAtRefresh = DealerPrice
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Class
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Class
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Style
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Style
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Style
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Model
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Model
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Model
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column 'Product Description'
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Product Description
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Product Description
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column EndDate
+		dataType: dateTime
+		formatString: General Date
+		summarizeBy: none
+		sourceColumn: EndDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+
+		annotation DataTypeAtRefresh = DateTime#####not a type
+
+		annotation PBI_NameAtRefresh = EndDate
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Status
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Status
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Subcategory
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Subcategory
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Subcategory
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	column Category
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Category
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation Format = <Format Format="Text" />
+
+		annotation DataTypeAtRefresh = String#####not a type
+
+		annotation PBI_NameAtRefresh = Category
+
+		annotation PBI_WasHiddenAtRefresh = False
+
+	hierarchy 'Product Hierarchy'
+
+		level Category
+			column: Category
+
+		level Subcategory
+			column: Subcategory
+
+		level 'Product Name'
+			column: 'Product Name'
+
+		level 'Product No'
+			column: 'Product No'
+
+	partition Product-7ac6dd2a-f8c5-4689-acc4-cbe69e024a04 = query
+		mode: import
+		source
+			query = SELECT * FROM [Product]
+			dataSource: a27999de-c4ba-44af-b910-b42a26083948
+
+	annotation PBI_Id = d8d1c790-fc66-496e-8d45-15a5b196e9f0
+
+	annotation LinkedQueryName = Product
+
+	annotation PBI_QueryRelationships = {"columnCount":27,"keyColumnNames":[],"queryRelationships":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{ProductSubcategoryKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{ProductKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactProductInventory.{ProductKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{ProductKey,0}","KeyColumnCount":1}],"columnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductAlternateKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductSubcategoryKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{WeightUnitMeasureCode,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SizeUnitMeasureCode,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EnglishProductName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{StandardCost,8}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{FinishedGoodsFlag,9}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Color,10}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SafetyStockLevel,11}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ReorderPoint,12}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ListPrice,13}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Size,14}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SizeRange,15}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Weight,16}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{DaysToManufacture,17}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductLine,18}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{DealerPrice,19}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Class,20}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Style,21}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ModelName,22}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{LargePhoto,23}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EnglishDescription,24}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EndDate,34}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Status,35}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{EnglishProductSubcategoryName,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{EnglishProductCategoryName,2}"],"ColumnCount":27,"KeyColumnNames":[],"ColumnIdentities":["Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductKey,0}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductAlternateKey,1}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductSubcategoryKey,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{WeightUnitMeasureCode,3}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SizeUnitMeasureCode,4}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EnglishProductName,5}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{StandardCost,8}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{FinishedGoodsFlag,9}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Color,10}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SafetyStockLevel,11}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ReorderPoint,12}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ListPrice,13}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Size,14}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{SizeRange,15}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Weight,16}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{DaysToManufacture,17}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ProductLine,18}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{DealerPrice,19}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Class,20}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Style,21}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{ModelName,22}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{LargePhoto,23}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EnglishDescription,24}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{EndDate,34}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProduct.{Status,35}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{EnglishProductSubcategoryName,2}","Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductCategory.{EnglishProductCategoryName,2}"],"RelationshipInfo":[{"keyColumnCount":1,"keyColumn":2,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/DimProductSubcategory.{ProductSubcategoryKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactInternetSales.{ProductKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactProductInventory.{ProductKey,0}","KeyColumnCount":1},{"keyColumnCount":1,"keyColumn":0,"otherKeyColumnIdentity":"Server.Database\\/2/SQL/.;AdventureWorksDW/dbo/FactResellerSales.{ProductKey,0}","KeyColumnCount":1}]}
+
+	annotation PBI_NavigationStepName = Navigation
+

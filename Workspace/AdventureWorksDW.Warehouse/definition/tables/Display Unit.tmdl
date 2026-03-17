@@ -1,0 +1,67 @@
+table 'Display Unit'
+	lineageTag: 624d3e30-64cb-4a82-ac44-6f9d47702bcf
+
+	calculationGroup
+		precedence: 2
+
+		calculationItem None = SELECTEDMEASURE()
+
+			formatStringDefinition = ```
+					SWITCH (TRUE,
+					     CONTAINSSTRING(SELECTEDMEASURENAME(), "%"), SELECTEDMEASUREFORMATSTRING()
+					     ,IF( HASONEVALUE( Metrics[Level 1] ), "", SELECTEDVALUE( Metrics[Metric Type] ) )="Percentage","0.0%"
+					     , "#,0"
+					     
+					 )
+					```
+
+		calculationItem Thousands = SELECTEDMEASURE()
+
+			formatStringDefinition = ```
+					SWITCH (TRUE,
+					     CONTAINSSTRING(SELECTEDMEASURENAME(), "%"), SELECTEDMEASUREFORMATSTRING()
+					     ,IF( HASONEVALUE( Metrics[Level 1] ), "", SELECTEDVALUE( Metrics[Metric Type] ) )="Percentage","0.0%"
+					     , "#,0,"
+					     
+					 )
+					```
+
+		calculationItem Millions = SELECTEDMEASURE()
+
+			formatStringDefinition = ```
+					SWITCH (TRUE,
+					     CONTAINSSTRING(SELECTEDMEASURENAME(), "%"), SELECTEDMEASUREFORMATSTRING()
+					     ,IF( HASONEVALUE( Metrics[Level 1] ), "", SELECTEDVALUE( Metrics[Metric Type] ) )="Percentage","0.0%"
+					     , "#,0,,.00"
+					     
+					 )
+					```
+
+		calculationItem Billions = SELECTEDMEASURE()
+
+			formatStringDefinition = ```
+					SWITCH (TRUE,
+					     CONTAINSSTRING(SELECTEDMEASURENAME(), "%"), SELECTEDMEASUREFORMATSTRING()
+					     ,IF( HASONEVALUE( Metrics[Level 1] ), "", SELECTEDVALUE( Metrics[Metric Type] ) )="Percentage","0.0%"
+					     , "#,0,,.00"
+					     
+					 )
+					```
+
+	measure 'Selected Unit' = SELECTEDVALUE('Display Unit'[Display Unit],"None")
+		lineageTag: 4d69a542-e1d4-4443-ab48-5aa36bed076b
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Display Unit'
+		dataType: string
+		lineageTag: 4a174358-462e-4b62-a0d3-5c8018a738c4
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 49d3a2df-fac6-432d-96b2-2c00e192c54b
+		sourceColumn: Ordinal
+
