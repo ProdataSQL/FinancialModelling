@@ -7,7 +7,7 @@ in PowerBI
 
 You can either download content here or cloen the repos and link it to a Workspace in Power BI.
 If you have a large/complex project and want help with the modelling you can also contact as at 
-(finance@prodata.ie)
+(info@prodata.ie)
 
 ## Contents
 
