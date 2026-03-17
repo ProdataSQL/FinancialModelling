@@ -27,9 +27,8 @@ This session walks through the **Statement Bridge approach (V1)** and the thinki
 
 
 ## Cashflow Reporting (V1)
-![alt text](image-1.png)(https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
+[![Cashflow Reporting for the Enterprise](image-1.png)](https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
 🎥 [Watch the video on Cashflow Reporting](https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
-
 
 ---
 Feel free to download and explore.
