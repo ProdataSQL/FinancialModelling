@@ -1,160 +1,100 @@
 table Date
-	lineageTag: 08015f70-7d70-4eda-80f2-1a924d8de049
+	lineageTag: cdee79c6-5211-4304-921e-91740bfdc0db
+	dataCategory: Time
 
 	measure MaxDate = max('Date'[Date])
 		formatString: General Date
-		lineageTag: 0976e05e-8244-4206-873e-bf06dafd798a
-
-		annotation Format = <Format Format="DateTimeGeneralPattern"><DateTimes><DateTime LCID="6153" Group="GeneralDateTimeLong" FormatString="G" /></DateTimes></Format>
+		lineageTag: 68d9ca2e-b185-48f3-a9eb-1d89ba60e4e3
 
 	column DateKey
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: 452d8412-eb71-4501-b1ec-22a6d8f7b4fc
+		lineageTag: 05df16dc-9e75-4d65-b54b-9c206e6000bc
 		summarizeBy: none
 		sourceColumn: DateKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = DateKey
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	column Date
 		dataType: dateTime
+		isKey
 		formatString: dd/mm/yyyy
-		lineageTag: b59962cf-9e73-4b25-81a6-a8cd96acb85c
+		lineageTag: 021eb795-bf35-4760-8b58-1024bce04468
 		summarizeBy: none
 		sourceColumn: Date
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="DateTimeCustom"><DateTimes><DateTime LCID="6153" Group="ShortDate" FormatString="dd/MM/yyyy" /></DateTimes></Format>
-
-		annotation DataTypeAtRefresh = DateTime#####Date
-
-		annotation PBI_NameAtRefresh = Date
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
 
 	column Month
 		dataType: string
-		lineageTag: 4750fc03-4a03-4e81-ad2f-5a7ff70795e9
+		lineageTag: 467e5eb2-1cea-4f7c-9e6c-9c7e0bd7f9be
 		summarizeBy: none
 		sourceColumn: Month
 		sortByColumn: 'Month No'
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
-
-		annotation PBI_NameAtRefresh = Month
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column 'Month No'
 		dataType: int64
 		formatString: 0
-		lineageTag: 342d793c-e59b-4422-a2d4-9cd21bcf71b1
+		lineageTag: 8c962144-1893-43ab-a84f-a6d7c6550440
 		summarizeBy: none
 		sourceColumn: Month No
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = Month No
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column 'Fiscal Year'
 		dataType: int64
 		formatString: 0
-		lineageTag: 44a0cfa6-e2e7-4d97-87f3-16e865bff990
+		lineageTag: bf7a0020-d4c4-44c4-91d1-db701806c607
 		summarizeBy: none
 		sourceColumn: Fiscal Year
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = Fiscal Year
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column 'Fiscal Quarter'
 		dataType: int64
 		formatString: 0
-		lineageTag: 7602a0cf-209b-43e6-b990-596acf4e5840
+		lineageTag: f84945d5-9133-4712-b602-881c9d13d1af
 		summarizeBy: none
 		sourceColumn: Fiscal Quarter
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = Fiscal Quarter
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column 'Fiscal Period No'
 		dataType: int64
 		formatString: 0
-		lineageTag: 20cea2de-faaf-4576-95d8-4aa5c6711c98
+		lineageTag: 56a0a4ae-cad2-4d35-8c65-b052cfc22227
 		summarizeBy: none
 		sourceColumn: Fiscal Period No
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = Fiscal Period No
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column 'Fiscal Period'
 		dataType: string
-		lineageTag: ef63f918-fa35-43ba-ad08-554aafc929e1
+		lineageTag: b8710815-c524-45ae-afc1-9aa0234827da
 		summarizeBy: none
 		sourceColumn: Fiscal Period
 		sortByColumn: 'Fiscal Period No'
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
-
-		annotation PBI_NameAtRefresh = Fiscal Period
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	hierarchy 'Fiscal Calendar'
-		lineageTag: 0cebbf4f-339a-4006-9011-5e5b75865558
+		lineageTag: 067a2a81-6269-47e7-9cb3-f1cc15b17550
 
 		level Year
-			lineageTag: a6db7dcb-1ddd-409d-ab48-49a504f71c62
+			lineageTag: 2e612ba2-b3e4-4447-8740-b900f56c89a0
 			column: 'Fiscal Year'
 
 		level 'Fiscal Period'
-			lineageTag: b8ba6dfc-be04-4f62-b15c-1f8dfc511a8a
+			lineageTag: 1ef439b0-18af-41fc-8423-5d603d1c3281
 			column: 'Fiscal Period'
 
 	partition Date-09ab7aeb-ed6f-4f1a-ae77-5e5a9261c99b = m
@@ -162,7 +102,9 @@ table Date
 		queryGroup: 'Finance GL'
 		source =
 				let
-				    Source=    Sql.Database("prd-sql.roebuck.local", "adventureworksdw", [Query="SELECT *#(lf), FiscalYear * 100  + MonthNumberOfYear as FiscalPeriodNo#(lf), CONVERT (varchar(4), FiscalYear) + '-' + format(MonthNumberOfYear,'00') as FiscalPeriod#(lf)FROM DimDate"]),
+				    Workbook= Excel.Workbook(File.Contents(Files & "Calendar.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    Source= Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
 				     #"Renamed Columns" = Table.RenameColumns(Source,{{"FullDateAlternateKey", "Date"}}),
 				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"CalendarQuarter", "CalendarSemester", "CalendarYear", "DayNumberOfMonth", "DayNumberOfWeek", "DayNumberOfYear", "EnglishDayNameOfWeek"}),
 				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"EnglishMonthName", "MonthOfYear"}, {"FiscalQuarter", "Fiscal Quarter"}}),
@@ -176,5 +118,5 @@ table Date
 
 	annotation PBI_ResultType = Table
 
-	annotation PBI_DescriptionAtRefresh
+	annotation PBI_NavigationStepName = Navigation
 

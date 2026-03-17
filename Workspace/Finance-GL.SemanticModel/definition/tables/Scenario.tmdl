@@ -1,46 +1,34 @@
 table Scenario
-	lineageTag: aa55d8a1-9a57-4815-8fe3-48acd590fb88
+	lineageTag: 766ad3df-babc-47ab-8d74-8d02e7f16987
 
 	column ScenarioKey
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: f23aa67a-f3b8-48a0-b7b0-2957a5a9e16f
+		lineageTag: 8807df16-d478-47a5-833c-5327dcdd6209
 		summarizeBy: none
 		sourceColumn: ScenarioKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = ScenarioKey
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	column Scenario
 		dataType: string
-		lineageTag: 903301f0-ed8c-4634-a39a-32155e767b39
+		lineageTag: 5fecbb8a-ebc8-4e82-88d2-107e8b4636c7
 		summarizeBy: none
 		sourceColumn: Scenario
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
-
-		annotation PBI_NameAtRefresh = Scenario
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	partition Scenario-180ddbc1-ecb6-47cf-a0a3-a068bda0bc9c = m
 		mode: import
 		queryGroup: 'Finance GL'
 		source =
 				let
-				    dbo_DimScenario = Sql.Database("prd-sql.roebuck.local", "adventureworksdw", [Query="SELECT * FROM DimScenario"]),
+				    Workbook= Excel.Workbook(File.Contents(Files & "Scenario.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    dbo_DimScenario = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
 				    #"Renamed Columns" = Table.RenameColumns(dbo_DimScenario,{{"ScenarioName", "Scenario"}}),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"ScenarioKey", Int64.Type}})
 				in
@@ -48,5 +36,5 @@ table Scenario
 
 	annotation PBI_ResultType = Table
 
-	annotation PBI_DescriptionAtRefresh
+	annotation PBI_NavigationStepName = Navigation
 

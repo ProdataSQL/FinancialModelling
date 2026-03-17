@@ -1,172 +1,118 @@
 table Organization
-	lineageTag: eaf5762c-b329-436a-b7c9-556fcc598f81
+	lineageTag: 0908758c-15c2-4c28-a709-23ba653ef7e9
 
 	column OrganizationKey
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: df6f19b0-997c-4f1f-a692-970de951f469
+		lineageTag: 7ce7ebeb-c060-453f-9e88-677682fc7442
 		summarizeBy: none
 		sourceColumn: OrganizationKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = OrganizationKey
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	column ParentOrganizationKey
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: edc862bf-9661-4cf0-afff-a726fe2b54a7
+		lineageTag: 633481cd-6da9-4983-b69e-2596a60d53d2
 		summarizeBy: none
 		sourceColumn: ParentOrganizationKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = ParentOrganizationKey
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	column PercentageOfOwnership
 		dataType: double
 		isHidden
-		lineageTag: db526a92-5be8-45db-9c21-2c8f86a4fc03
+		lineageTag: c04f6f03-e71f-4e64-9a2c-511fc5aa2c5e
 		summarizeBy: none
 		sourceColumn: PercentageOfOwnership
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="General" />
-
-		annotation DataTypeAtRefresh = Double#####not a type
-
-		annotation PBI_NameAtRefresh = PercentageOfOwnership
-
-		annotation PBI_WasHiddenAtRefresh = False
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
 
 	column 'Organization Name'
 		dataType: string
-		lineageTag: 5e313b8a-36ae-4575-96c8-f56730564f7c
+		lineageTag: 9c968045-a17e-41eb-8e46-0fa30fea0513
 		summarizeBy: none
 		sourceColumn: Organization Name
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
-
-		annotation PBI_NameAtRefresh = Organization Name
-
-		annotation PBI_WasHiddenAtRefresh = False
-
 	column CurrencyKey
 		dataType: int64
 		isHidden
 		formatString: 0
-		lineageTag: f73a8fcb-ccc7-4c08-9454-92ab6121f0a6
+		lineageTag: aac3251c-8bbe-4311-bff5-7ffc8a2bdb30
 		summarizeBy: none
 		sourceColumn: CurrencyKey
 
+		changedProperty = IsHidden
+
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
-
-		annotation PBI_NameAtRefresh = CurrencyKey
-
-		annotation PBI_WasHiddenAtRefresh = False
 
 	column OrganizationPath = path(Organization[OrganizationKey], Organization[ParentOrganizationKey])
 		isHidden
-		lineageTag: c162a6c0-717a-4777-ace3-fe88cebc14d4
+		lineageTag: 784c2216-530b-477d-bf39-563133b37b10
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
 
 	column 'Organization Path Length' = PATHLENGTH( Organization[OrganizationPath] )
 		formatString: 0
-		lineageTag: 59c39cef-6c29-484b-ba60-524277d6155b
+		lineageTag: 5ccecd9e-787a-45cd-97ac-28b4d9f2bf46
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="NumberWhole" Accuracy="0" />
-
-		annotation DataTypeAtRefresh = Int64#####not a type
 
 	column Company = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 1,INTEGER))
-		lineageTag: 3d539da1-fd76-4047-8fbf-e0a0b933a9c8
+		lineageTag: f97c577c-f63a-4d2f-8fb6-4c58ed93ccc6
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
 
 	column Region = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 2,INTEGER))
-		lineageTag: f38313da-c376-49ad-a791-607487d8fb43
+		lineageTag: 96083335-c805-4fe0-bb87-13474e24e6c1
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
 
 	column Country = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 3,INTEGER))
-		lineageTag: d1dcc9bb-75dd-4ac9-bc79-6bdea18f6961
+		lineageTag: c3ce3fa7-f7d9-43fc-9ada-a4c55659f3ef
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
-
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
 
 	column 'Organization L4' = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 4,INTEGER))
-		lineageTag: 752a3add-adfa-48f4-9de0-81f06efba8ba
+		lineageTag: 8b4c3b8b-5c76-4b2b-8559-421977a27152
 		summarizeBy: none
 
 		annotation SummarizationSetBy = Automatic
 
-		annotation Format = <Format Format="Text" />
-
-		annotation DataTypeAtRefresh = String#####not a type
-
 	hierarchy Organization
-		lineageTag: f79e21b4-4478-40af-b8b6-75b9ac8c1524
+		lineageTag: 9f6c7424-d66b-45dc-807f-1b71585a8784
 
 		level Company
-			lineageTag: bc5a03bf-6f9f-4877-b56b-0004e007baca
+			lineageTag: 0f052578-474a-4268-bc6a-7b617b44e327
 			column: Company
 
 		level Region
-			lineageTag: a0fae26d-8fcb-4c28-b5ab-0dcdac0d800e
+			lineageTag: 3fe7cf1e-af77-448e-8e23-6e33bd75dfbd
 			column: Region
 
 		level Country
-			lineageTag: a38b9d6e-c9a2-4fe2-8a81-a9246c7831e2
+			lineageTag: 210981d6-85a8-4722-87ce-a1aa5d74892d
 			column: Country
 
 		level Division
-			lineageTag: 7c16125a-7038-47cc-9716-f898c3d769e3
+			lineageTag: 148984eb-cebb-4a5c-850f-13cc08a5026c
 			column: 'Organization L4'
 
 	partition Organization-d9ef92dd-2885-427f-bb6c-29b8742818b8 = m
@@ -174,7 +120,9 @@ table Organization
 		queryGroup: 'Finance GL'
 		source =
 				let
-				    dbo_DimOrganization=  Sql.Database("prd-sql.roebuck.local", "adventureworksdw", [Query="SELECT * FROM DimOrganization"]),
+				    Workbook= Excel.Workbook(File.Contents(Files & "Organisation.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    dbo_DimOrganization= Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
 				    #"Renamed Columns" = Table.RenameColumns(dbo_DimOrganization,{{"OrganizationName", "Organization Name"}}),
 				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"OrganizationKey", Int64.Type}, {"ParentOrganizationKey", Int64.Type}, {"PercentageOfOwnership", type number}, {"CurrencyKey", Int64.Type}})
 				in
@@ -182,5 +130,5 @@ table Organization
 
 	annotation PBI_ResultType = Table
 
-	annotation PBI_DescriptionAtRefresh
+	annotation PBI_NavigationStepName = Navigation
 

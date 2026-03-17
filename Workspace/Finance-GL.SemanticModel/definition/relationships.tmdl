@@ -18,12 +18,13 @@ relationship fbf24dff-3cf2-45ed-9c8c-7af158d9c802
 	fromColumn: 'General Ledger'.ScenarioKey
 	toColumn: Scenario.ScenarioKey
 
-relationship 96e19940-038d-458c-a4eb-fdf054f0a7d7
-	crossFilteringBehavior: bothDirections
-	fromColumn: ReportAccountMap.AccountKey
-	toColumn: Account.AccountKey
+relationship ea77ec99-d695-99e8-e92e-dbb0f4e1a51e
+	toCardinality: many
+	fromColumn: Metrics.'Metric ID'
+	toColumn: Statement.'Metric ID'
 
-relationship dd626e25-5abe-49f7-9387-382ece1994eb
-	fromColumn: ReportAccountMap.ReportNo
-	toColumn: 'Finanical Report'.'Report No'
+relationship 0f5430aa-50e3-d577-0f50-03e3f5597913
+	crossFilteringBehavior: bothDirections
+	fromColumn: Metrics.AccountKey
+	toColumn: Account.AccountKey
 

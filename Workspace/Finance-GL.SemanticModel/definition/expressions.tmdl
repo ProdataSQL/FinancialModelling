@@ -1,89 +1,223 @@
-expression AccountRules =
+expression Files = "C:\Projects\Github\FinancialModelling\Files\" meta [IsParameterQuery=true, Type="Any", IsParameterQueryRequired=true]
+	lineageTag: b434c575-338e-4f68-a642-4a5118bdbf17
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Text
+
+expression Statement-Elements =
 		let
-		    dbo_DimAccount =  Sql.Database("prd-sql.roebuck.local", "adventureworksdw", [Query="SELECT * FROM staging.AccountRangeRules"]),
-		    #"Changed Type" = Table.TransformColumnTypes(dbo_DimAccount,{{"FromAccountNo", Int64.Type}, {"ToAccountNo", Int64.Type}, {"ReportNo", Int64.Type}})
-		in
-		    #"Changed Type"
-	lineageTag: f0815a39-7be4-4c32-a035-3a08f71cafdb
-	queryGroup: Hidden
-
-	annotation PBI_DescriptionAtRefresh
-
-	annotation PBI_ResultType = Table
-
-expression AccountRulesCore =
-		let
-		    Source = AccountRules,
-		    #"Added Custom" = Table.AddColumn(Source, "FromToAccountNo", each {[FromAccountNo]..[ToAccountNo]}),
+		    Workbook= Excel.Workbook(File.Contents(Files & "Statement.xlsx"), null, true),
+		    Sheet = Workbook{[Item="Elements",Kind="Sheet"]}[Data],
+		    Elements = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+		    #"Changed Type" = Table.TransformColumnTypes(Elements,{{"Element", type text}, {"FromAccountNo", Int64.Type}, {"ToAccountNo", Int64.Type}, {"Signage", Int64.Type}}),
+		    #"Added Custom" = Table.AddColumn(#"Changed Type", "FromToAccountNo", each {[FromAccountNo]..[ToAccountNo]}),
 		    #"Expanded FromToAccountNo" = Table.ExpandListColumn(#"Added Custom", "FromToAccountNo"),
-		    #"Renamed Columns" = Table.RenameColumns(#"Expanded FromToAccountNo",{{"FromToAccountNo", "AccountNo"}}),
-		    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns", {"ReportNo"}, #"Finanical Report", {"Report No"}, "Finanical Report", JoinKind.Inner),
-		    #"Expanded Finanical Report" = Table.ExpandTableColumn(#"Merged Queries1", "Finanical Report", {"Operator", "Calc1", "Report"}, {"Operator", "Calc1", "Report"}),
-		    #"Merged Queries" = Table.NestedJoin(#"Expanded Finanical Report", {"AccountNo"}, Account, {"Account Code"}, "Account", JoinKind.Inner),
+		    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded FromToAccountNo",{{"FromToAccountNo", Int64.Type}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Changed Type1", {"FromToAccountNo"}, Account, {"Account Code"}, "Account", JoinKind.Inner),
 		    #"Expanded Account" = Table.ExpandTableColumn(#"Merged Queries", "Account", {"AccountKey"}, {"AccountKey"}),
-		    #"Removed Columns" = Table.RemoveColumns(#"Expanded Account",{"ReportSection", "FromAccountNo", "ToAccountNo", "AccountNo", "Operator", "Calc1"})
+		    #"Removed Columns" = Table.RemoveColumns(#"Expanded Account",{"FromAccountNo", "ToAccountNo", "FromToAccountNo"})
 		in
 		    #"Removed Columns"
-	lineageTag: 438f549c-fcd8-44d0-9a4f-0483e2e7011d
+	lineageTag: d5f65308-9e42-4290-b94e-191e66f41aba
 	queryGroup: Hidden
-
-	annotation PBI_DescriptionAtRefresh
 
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
 
-expression AccountRulesRSum =
+expression Stastement-Metric =
 		let
-		    Source = #"Finanical Report",
-		    #"FirstReportNo" = Table.AddColumn(Source, "FirstLineNo", each 1),
-		    #"Added Custom" = Table.AddColumn(FirstReportNo, "ChildLineNo", each {[FirstLineNo]..[LineNo]}),
-		    #"Filtered Rows" = Table.SelectRows(#"Added Custom", each ([Operator] = "Running Sum")),
-		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"LineNo", "Report Section", "ReportHeadingNo", "Report Heading", "Operator", "Calc1", "FirstLineNo"}),
-		    #"Expanded AccountRSum" = Table.ExpandListColumn(#"Removed Columns", "ChildLineNo"),
-		    #"Changed Type" = Table.TransformColumnTypes(#"Expanded AccountRSum",{{"ChildLineNo", Int64.Type}}),
-		    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"Report No", "ReportNo"}}),
-		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"ChildLineNo", "Report"}, #"Finanical Report", {"LineNo", "Report"}, "Finanical Report", JoinKind.Inner),
-		    #"Expanded Finanical Report" = Table.ExpandTableColumn(#"Merged Queries", "Finanical Report", {"Report No", "Operator", "Calc1"}, {"Finanical Report.Report No", "Finanical Report.Operator", "Finanical Report.Calc1"}),
-		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Finanical Report", each ([Finanical Report.Operator] = "Sum")),
-		    #"Removed Columns1" = Table.RemoveColumns(#"Filtered Rows1",{"Finanical Report.Operator", "Finanical Report.Calc1"}),
-		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns1",{{"Finanical Report.Report No", "ChildReportNo"}}),
-		    #"Merged Queries1" = Table.NestedJoin(#"Renamed Columns1", {"ChildReportNo"}, AccountRulesCore, {"ReportNo"}, "AccountRulesCore", JoinKind.Inner),
-		    #"Expanded AccountRulesCore" = Table.ExpandTableColumn(#"Merged Queries1", "AccountRulesCore", {"AccountKey"}, {"AccountKey"}),
-		    #"Removed Columns2" = Table.RemoveColumns(#"Expanded AccountRulesCore",{"ChildReportNo", "ChildLineNo", "LinkReport", "LinkLineNo", "LinkHeading", "LinkSignage"})
+		    Workbook = Excel.Workbook(File.Contents(Files & "Statement.xlsx"), null, true),
+		    Sheet = Workbook{[Item="Metrics", Kind="Sheet"]}[Data],
+		    Elements = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+		
+		    #"Added Index" =
+		        Table.AddIndexColumn(Elements, "Index", 1, 1, Int64.Type),
+		
+		    #"Sorted Rows" =
+		        Table.Sort(
+		            #"Added Index",
+		            {
+		                {"Metric", Order.Ascending},
+		                {"Index", Order.Ascending}
+		            }
+		        ),
+		
+		    Grouped =
+		        Table.Group(
+		            #"Sorted Rows",
+		            {"Metric"},
+		            {
+		                {
+		                    "Data",
+		                    (t) => Table.AddIndexColumn(t, "Ordinal", 1, 1, Int64.Type)
+		                }
+		            },
+		            GroupKind.Local
+		        ),
+		
+		    Expanded =
+		        Table.ExpandTableColumn(
+		            Grouped,
+		            "Data",
+		            {"Index","Element","MetricType","Signage","Ordinal"}
+		        ),
+		
+		    #"Changed Type1" =
+		        Table.TransformColumnTypes(
+		            Expanded,
+		            {
+		                {"Index", Int64.Type},
+		                {"Element", type text},
+		                {"Metric", type text},
+		                {"Signage", Int64.Type},
+		                {"Ordinal", Int64.Type},
+		                {"MetricType", type text}
+		            }
+		        ),
+		
+		    MetricIDTable =
+		        Table.Group(
+		            #"Changed Type1",
+		            {"Metric"},
+		            {
+		                {"MetricID", each List.Min([Index]), Int64.Type}
+		            }
+		        ),
+		
+		    #"Merged MetricID" =
+		        Table.NestedJoin(
+		            #"Changed Type1",
+		            {"Metric"},
+		            MetricIDTable,
+		            {"Metric"},
+		            "MetricID",
+		            JoinKind.LeftOuter
+		        ),
+		
+		    #"Expanded MetricID" =
+		        Table.ExpandTableColumn(
+		            #"Merged MetricID",
+		            "MetricID",
+		            {"MetricID"}
+		        ),
+		    #"Reordered Columns" = Table.ReorderColumns(#"Expanded MetricID",{"MetricID", "Metric", "Index", "Element", "MetricType", "Signage", "Ordinal"}),
+		    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"MetricID", "Metric ID"}, {"MetricType", "Metric Type"}})
 		in
-		    #"Removed Columns2"
-	lineageTag: efa1d6ac-c1da-45a9-bde3-d7fc75584b2a
+		    #"Renamed Columns"
+	lineageTag: 2613fcb0-3aa0-49c6-a4fc-e615dcb28094
 	queryGroup: Hidden
-
-	annotation PBI_DescriptionAtRefresh
 
 	annotation PBI_NavigationStepName = Navigation
 
 	annotation PBI_ResultType = Table
 
-expression AccountRulesCustom =
+expression Stastement-Hierarchy =
 		let
-		    Source = #"Finanical Report",
-		    #"Filtered Rows" = Table.SelectRows(Source, each ([Operator] = "Sum") and ([Calc1] <> null)),
-		    #"Removed Columns" = Table.RemoveColumns(#"Filtered Rows",{"LineNo", "Report Section", "ReportHeadingNo", "Report Heading", "Operator"}),
-		    #"Renamed Columns" = Table.RenameColumns(#"Removed Columns",{{"Report No", "ChildReportNo"}}),
-		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Calc1"}, #"Finanical Report", {"Report Heading"}, "Finanical Report", JoinKind.Inner),
-		    #"Expanded Finanical Report" = Table.ExpandTableColumn(#"Merged Queries", "Finanical Report", {"Report No", "Operator", "Report"}, {"Report No", "Operator", "Report.1"}),
-		    #"Filtered Rows1" = Table.SelectRows(#"Expanded Finanical Report", each true),
-		    #"Reordered Columns" = Table.ReorderColumns(#"Filtered Rows1",{"Report No", "Report", "ChildReportNo", "Calc1", "Operator", "Report.1"}),
-		    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns",{"Calc1", "Operator", "Report.1"}),
-		    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns1", {"ChildReportNo"}, AccountRulesCore, {"ReportNo"}, "AccountRulesCore", JoinKind.Inner),
-		    #"Expanded AccountRulesCore" = Table.ExpandTableColumn(#"Merged Queries1", "AccountRulesCore", {"AccountKey"}, {"AccountKey"}),
-		    #"Removed Columns2" = Table.RemoveColumns(#"Expanded AccountRulesCore",{"ChildReportNo"}),
-		    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns2",{{"Report No", "ReportNo"}}),
-		    #"Removed Columns3" = Table.RemoveColumns(#"Renamed Columns1",{"LinkReport", "LinkLineNo", "LinkHeading", "LinkSignage"})
+		    SourceM = #"Stastement-Metric",
+		    Source0 = Table.SelectColumns(SourceM, {"Metric ID","Metric","Element","Metric Type","Ordinal"}),
+		    Source = Table.Distinct(Source0),
+		
+		    Metrics = List.Distinct(Source[Metric]),
+		
+		    Expand1 =
+		        Table.NestedJoin(Source, {"Element"}, Source, {"Metric"}, "L1", JoinKind.LeftOuter),
+		
+		    Expand1a =
+		        Table.ExpandTableColumn(Expand1, "L1", {"Element"}, {"Level1"}),
+		
+		    Expand2 =
+		        Table.NestedJoin(Expand1a, {"Level1"}, Source, {"Metric"}, "L2", JoinKind.LeftOuter),
+		
+		    Expand2a =
+		        Table.ExpandTableColumn(Expand2, "L2", {"Element"}, {"Level2"}),
+		
+		    Expand3 =
+		        Table.NestedJoin(Expand2a, {"Level2"}, Source, {"Metric"}, "L3", JoinKind.LeftOuter),
+		
+		    Expand3a =
+		        Table.ExpandTableColumn(Expand3, "L3", {"Element"}, {"Level3"}),
+		
+		    Expand4 =
+		        Table.NestedJoin(Expand3a, {"Level3"}, Source, {"Metric"}, "L4", JoinKind.LeftOuter),
+		
+		    Expand4a =
+		        Table.ExpandTableColumn(Expand4, "L4", {"Element"}, {"Level4"}),
+		
+		    Expand5 =
+		        Table.NestedJoin(Expand4a, {"Level4"}, Source, {"Metric"}, "L5", JoinKind.LeftOuter),
+		
+		    Expand5a =
+		        Table.ExpandTableColumn(Expand5, "L5", {"Element"}, {"Level5"}),
+		
+		    AddLeaf =
+		        Table.AddColumn(
+		            Expand5a,
+		            "LeafElement",
+		            each
+		                let
+		                    path =
+		                        {
+		                            [Element],
+		                            [Level1],
+		                            [Level2],
+		                            [Level3],
+		                            [Level4],
+		                            [Level5]
+		                        },
+		
+		                    leaf =
+		                        List.First(
+		                            List.Select(
+		                                path,
+		                                (x)=> x <> null and not List.Contains(Metrics,x)
+		                            ),
+		                            List.Last(List.RemoveNulls(path))
+		                        )
+		                in
+		                    leaf,
+		            type text
+		        ),
+		
+		    Result =
+		        Table.SelectColumns(
+		            AddLeaf,
+		            {
+		                "Metric ID",
+		                "Metric",
+		                "Element",
+		                "Metric Type",
+		                "Level1",
+		                "Level2",
+		                "Level3",
+		                "Level4",
+		                "Level5",
+		                "LeafElement","Ordinal"
+		            }
+		        ),
+		    #"Renamed Columns" = Table.RenameColumns(Result,{{"Element", "Level 1"}, {"Level1", "Level 2"}, {"Level2", "Level 3"}, {"Level3", "Level 4"}, {"Level4", "Level 5"}, {"Level5", "Level 6"}, {"LeafElement", "Element"}}),
+		    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"Element"}, #"Statement-Elements", {"Element"}, "Statement-Elements", JoinKind.LeftOuter),
+		    #"Expanded Statement-Elements" = Table.ExpandTableColumn(#"Merged Queries", "Statement-Elements", {"Signage", "AccountKey"}, {"Signage", "AccountKey"}),
+		    #"Renamed Columns1" = Table.RenameColumns(#"Expanded Statement-Elements",{{"Signage", "Element Signage"}})
 		in
-		    #"Removed Columns3"
-	lineageTag: 9eadc439-44c1-427e-b55d-afdc6c5e100a
+		    #"Renamed Columns1"
+	lineageTag: 7a83c267-2043-4643-863a-064f4b665b2d
 	queryGroup: Hidden
 
-	annotation PBI_DescriptionAtRefresh
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
+expression 'Unique Metrics' =
+		let
+		    Source = #"Stastement-Metric",
+		    #"Grouped Rows" = Table.Group(Source, {"Metric"}, {{"Metric ID", each List.Min([Metric ID]), type nullable number}}),
+		    #"Changed Type" = Table.TransformColumnTypes(#"Grouped Rows",{{"Metric ID", Int64.Type}})
+		in
+		    #"Changed Type"
+	lineageTag: b55438fb-1f29-46ab-882b-4cd11f384fe1
+	queryGroup: Hidden
 
 	annotation PBI_NavigationStepName = Navigation
 
