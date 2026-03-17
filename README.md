@@ -25,8 +25,13 @@ Want to see the original design pattern in action?
 
 This session walks through the **Statement Bridge approach (V1)** and the thinking behind the model.
 
----
 
+## Cashflow Reporting (V1)
+![alt text](image-1.png)(https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
+🎥 [Watch the video on Cashflow Reporting](https://www.youtube.com/watch?v=9iuW-zJvleQ&t=5s)
+
+
+---
 Feel free to download and explore.
 
 This design pattern has already been proven across multiple ERPs, including:
