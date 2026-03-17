@@ -20,10 +20,10 @@ Welcome to our updated sample site for Financial Modelling with Power BI.
 
 ## SQLBits Session (V1 Design)
 Want to see the original design pattern in action?
-![alt text](image.png)
+[![SQLBits Power BI Financial Modelling Session](./image.png)](https://www.youtube.com/watch?v=hoGI1iNb9k0)
 🎥 [Watch the SQLBits session](https://www.youtube.com/watch?v=hoGI1iNb9k0)
 
-This recording walks through the **Statement Bridge approach (V1)** and the thinking behind the model.
+This session walks through the **Statement Bridge approach (V1)** and the thinking behind the model.
 
 ---
 
