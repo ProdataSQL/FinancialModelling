@@ -2,6 +2,13 @@
 
 Welcome to our updated sample site for Financial Modelling with Power BI.
 
+This repos contains some of out widely adopted design patterns for Enterprise Financial Modelling 
+in PowerBI
+
+You can either download content here or cloen the repos and link it to a Workspace in Power BI.
+If you have a large/complex project and want help with the modelling you can also contact as at 
+(finance@prodata.ie)
+
 ## Contents
 
 - **Sample Power BI PBIP with P&L, BS and CF**  
