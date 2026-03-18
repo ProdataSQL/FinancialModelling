@@ -1,0 +1,106 @@
+table Date
+	lineageTag: 55644a2d-9c46-4838-aaf1-434be35f1f51
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: babff4ad-6c51-4fa0-b870-b396b65f73d7
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: ddc06448-8f46-42d7-8d40-aedb3fcce618
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: string
+		lineageTag: fd62eef0-ddc1-4efe-a613-86bdbd4477df
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month No'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Month No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5c16ad31-97ab-4a16-9e51-fa61ab419da3
+		summarizeBy: none
+		sourceColumn: Month No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: 525fdd73-7582-4188-a0b1-21c7d69b10b5
+		summarizeBy: none
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: 30eb8277-2274-478b-aa59-81e4c42e1c9e
+		summarizeBy: none
+		sourceColumn: Fiscal Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 99473bc8-dc44-4688-ad67-1f271d160b5b
+		summarizeBy: none
+		sourceColumn: Fiscal Period No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period'
+		dataType: string
+		lineageTag: e1c6199e-ef55-45de-af07-371fe7c776fc
+		summarizeBy: none
+		sourceColumn: Fiscal Period
+		sortByColumn: 'Fiscal Period No'
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	hierarchy 'Fiscal Calendar'
+		lineageTag: 7a0cc7f3-8e97-4df3-a04e-435f0d94a6df
+
+		level Year
+			lineageTag: 9739140f-53a1-4c17-bfce-0dbb39009cff
+			column: 'Fiscal Year'
+
+	partition Date-09ab7aeb-ed6f-4f1a-ae77-5e5a9261c99b = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017", [Query="SELECT  [DateKey]#(lf)      ,[FullDateAlternateKey]#(lf)      ,[DayNumberOfWeek]#(lf)      ,[EnglishDayNameOfWeek]#(lf)      ,[SpanishDayNameOfWeek]#(lf)      ,[FrenchDayNameOfWeek]#(lf)      ,[DayNumberOfMonth]#(lf)      ,[DayNumberOfYear]#(lf)      ,[WeekNumberOfYear]#(lf)      ,[EnglishMonthName]#(lf)      ,[SpanishMonthName]#(lf)      ,[FrenchMonthName]#(lf)      ,[MonthNumberOfYear]#(lf)      ,[CalendarQuarter]#(lf)      ,[CalendarYear]#(lf)      ,[CalendarSemester]#(lf)      ,[FiscalQuarter]#(lf)      ,[FiscalYear]#(lf)      ,[FiscalSemester]#(lf)#(tab)  , [FiscalYear] * 100 + format(DENSE_RANK () over ( partition by FiscalYear order by FiscalQuarter, MonthNumberOfyear),'00')  as FiscalPeriodNo#(lf)#(tab)  , convert (char(4) ,[FiscalYear])  + '-' + format(DENSE_RANK () over ( partition by FiscalYear order by FiscalQuarter, MonthNumberOfyear),'00')  as FiscalPeriod#(lf)  FROM [AdventureWorksDW2017].[dbo].[DimDate]"]),
+				    #"Renamed Columns" = Table.RenameColumns(Source,{{"FullDateAlternateKey", "Date"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"CalendarQuarter", "CalendarSemester", "CalendarYear", "DayNumberOfMonth", "DayNumberOfWeek", "DayNumberOfYear", "EnglishDayNameOfWeek"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"EnglishMonthName", "MonthOfYear"}, {"FiscalQuarter", "Fiscal Quarter"}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns1",{"FiscalSemester"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Removed Columns1",{{"FiscalYear", "Fiscal Year"}}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Renamed Columns2",{"FrenchMonthName", "FrenchDayNameOfWeek", "SpanishDayNameOfWeek", "SpanishMonthName", "WeekNumberOfYear"}),
+				    #"Renamed Columns3" = Table.RenameColumns(#"Removed Columns2",{{"MonthOfYear", "Month"}, {"MonthNumberOfYear", "Month No"}, {"FiscalPeriod", "Fiscal Period"}, {"FiscalPeriodNo", "Fiscal Period No"}})
+				in
+				    #"Renamed Columns3"
+
+	annotation PBI_ResultType = Table
+

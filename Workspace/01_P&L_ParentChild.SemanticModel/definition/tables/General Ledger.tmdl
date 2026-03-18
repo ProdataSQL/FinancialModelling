@@ -1,0 +1,161 @@
+table 'General Ledger'
+	lineageTag: b31e2d43-5982-483c-bd47-19fd8ca454ef
+
+	measure 'GL Amount' = VAR s =   SELECTEDVALUE(Scenario[Scenario],"Actual") RETURN   CALCULATE(sum('General Ledger'[BaseAmount] ), Scenario[Scenario] =s) * Account[HideAccount]
+		formatString: #,0
+		lineageTag: c3abbf5d-7b54-467a-b77d-508102e0e699
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6f3e1cb-a800-48b4-a151-acfeacc6a0eb
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e2e5036e-c47c-43d3-b4de-72ef325e0900
+		summarizeBy: none
+		sourceColumn: OrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f0af9043-869b-4aa8-a2ac-8c380c5cf51f
+		summarizeBy: none
+		sourceColumn: DepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5f0b35e4-3465-446d-ac74-c9cd8194a096
+		summarizeBy: none
+		sourceColumn: ScenarioKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 4d3a7208-acac-449c-8987-c6c67ce724df
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Amount
+		dataType: double
+		isHidden
+		lineageTag: 47d25a5f-2f7c-464d-984d-cb7ede2f5708
+		summarizeBy: none
+		sourceColumn: Amount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: General Date
+		lineageTag: 3a09fb6c-6796-4f75-91f6-255096ed17a2
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator
+		dataType: string
+		isHidden
+		lineageTag: f1af8d40-a166-42ce-9f0b-d0e423282379
+		summarizeBy: none
+		sourceColumn: Operator
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column BaseAmount
+		dataType: double
+		lineageTag: 7aea7e9d-0e63-42d3-b3bf-3b4fc50f97ad
+		summarizeBy: sum
+		sourceColumn: BaseAmount
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column ValueType
+		dataType: string
+		isHidden
+		lineageTag: 4da8286d-e03e-4740-b718-c740f32677a7
+		summarizeBy: none
+		sourceColumn: ValueType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column AccountType
+		dataType: string
+		lineageTag: c448f1fc-8862-4ad6-a22d-56340f6c060d
+		summarizeBy: none
+		sourceColumn: AccountType
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition 'General Ledger-d699db49-9681-49fc-b81e-bf1140f35c13' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017"),
+				    dbo_FactFinance = Source{[Schema="dbo",Item="FactFinance"]}[Data],
+				    #"Removed Columns" = Table.RemoveColumns(dbo_FactFinance,{"FinanceKey", "DimDate", "DimDepartmentGroup", "DimOrganization", "DimScenario"}),
+				    #"Expanded DimAccount" = Table.ExpandRecordColumn(#"Removed Columns", "DimAccount", {"AccountType", "Operator", "ValueType"}, {"DimAccount.AccountType", "DimAccount.Operator", "DimAccount.ValueType"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Expanded DimAccount",{{"DimAccount.Operator", "Operator"}, {"DimAccount.ValueType" ,"ValueType"}, {"DimAccount.AccountType", "AccountType"}}),
+				    #"Apply Operator (+/-)" = Table.AddColumn(#"Renamed Columns", "BaseAmount", each ([Amount]) * (if [AccountType]="Expenditures" then -1 else 1 )),
+				    #"Filtered Only Currency" = Table.SelectRows(#"Apply Operator (+/-)", each ([ValueType] = "Currency")),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Filtered Only Currency",{{"Amount", type number}, {"BaseAmount", type number}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = General Ledger
+
+	annotation PBI_NavigationStepName = Navigation
+

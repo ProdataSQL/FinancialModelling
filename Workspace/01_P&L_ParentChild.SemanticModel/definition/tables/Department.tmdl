@@ -1,0 +1,86 @@
+table Department
+	lineageTag: 28c439a6-f497-4a53-9e24-7fa52a1d47d4
+
+	column DepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 33227b0d-4fd1-4351-8ff0-c0d5fcca08ec
+		summarizeBy: none
+		sourceColumn: DepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentDepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 80910795-a3cc-47e4-a151-a3a3c12d3048
+		summarizeBy: none
+		sourceColumn: ParentDepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Department Name'
+		dataType: string
+		lineageTag: 6f1cbd08-7622-4c84-96ec-ea6fbdacdbda
+		summarizeBy: none
+		sourceColumn: Department Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column DepartmentPath = path('Department'[DepartmentGroupKey], 'Department'[ParentDepartmentGroupKey])
+		lineageTag: df1565af-5ef8-476e-bcf6-44a761f30926
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Department Group' = LOOKUPVALUE( Department[Department Name], Department[DepartmentGroupKey]  ,   PATHITEM( Department[DepartmentPath], 1,INTEGER))
+		lineageTag: a9dbc52f-c588-4e05-ad30-15b98300096f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Department = LOOKUPVALUE( Department[Department Name], Department[DepartmentGroupKey]  ,   PATHITEM( Department[DepartmentPath], 2,INTEGER))
+		lineageTag: eab6f01e-36fa-4dfc-bc7b-fe214e0c254e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	hierarchy 'Department Hierarchy'
+		lineageTag: ae261a43-787d-4b01-a1b9-ad7e7e558e41
+
+		level 'Department Group'
+			lineageTag: 95cc005d-e261-43e1-947a-ab00d28e3ee8
+			column: 'Department Group'
+
+		level 'Sub Department'
+			lineageTag: 6674353b-1764-4102-bb9a-fa18bf6d3fdb
+			column: Department
+
+	partition Department-d6337107-b576-462b-b572-d473a86f9f30 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017"),
+				    dbo_DimDepartmentGroup = Source{[Schema="dbo",Item="DimDepartmentGroup"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimDepartmentGroup,{{"DepartmentGroupName", "Department Name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Department
+

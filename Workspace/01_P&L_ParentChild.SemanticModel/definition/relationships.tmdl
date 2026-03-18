@@ -1,0 +1,20 @@
+relationship cd05fc32-33b4-427a-bf73-3728d715c767
+	fromColumn: 'General Ledger'.AccountKey
+	toColumn: Account.AccountKey
+
+relationship 745c43ae-c789-489d-9d29-2c6130d898fd
+	fromColumn: 'General Ledger'.DepartmentGroupKey
+	toColumn: Department.DepartmentGroupKey
+
+relationship bdeb2644-8100-4ead-87b8-9a1fdd5084f0
+	fromColumn: 'General Ledger'.ScenarioKey
+	toColumn: Scenario.ScenarioKey
+
+relationship f4aa0e09-ce9e-4d49-9822-a57fdc5363e2
+	fromColumn: 'General Ledger'.OrganizationKey
+	toColumn: Organization.OrganizationKey
+
+relationship 296c0dac-acaa-487b-ace8-4d6118073ab8
+	fromColumn: 'General Ledger'.DateKey
+	toColumn: Date.DateKey
+

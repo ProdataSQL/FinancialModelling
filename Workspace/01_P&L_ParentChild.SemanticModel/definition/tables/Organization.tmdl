@@ -1,0 +1,141 @@
+table Organization
+	lineageTag: 30325518-e5dd-4df2-a16c-fa6cb326f168
+
+	column OrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 9600d4ff-be9b-47af-96f7-7aaa330b9e01
+		summarizeBy: none
+		sourceColumn: OrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentOrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ef8bc2d6-7b04-433a-9b37-acb8db34f515
+		summarizeBy: none
+		sourceColumn: ParentOrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PercentageOfOwnership
+		dataType: string
+		isHidden
+		lineageTag: 2a13330a-2ca3-4803-9e21-60694a34655f
+		summarizeBy: none
+		sourceColumn: PercentageOfOwnership
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Organization Name'
+		dataType: string
+		lineageTag: b29a71f5-4722-4122-802f-0a9bcde1cb38
+		summarizeBy: none
+		sourceColumn: Organization Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CurrencyKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5710f3da-10bc-4951-a687-e798e44c8768
+		summarizeBy: none
+		sourceColumn: CurrencyKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganizationPath = path(Organization[OrganizationKey], Organization[ParentOrganizationKey])
+		isHidden
+		lineageTag: 95ed164b-ddd1-4e42-9346-56ceb51a1850
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Organization Path Length' = PATHLENGTH( Organization[OrganizationPath] )
+		formatString: 0
+		lineageTag: b2b5f730-2c77-438f-80db-112577383ceb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Company = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 1,INTEGER))
+		lineageTag: e5cb8dbe-c7b8-4bde-8dc2-d52d7e3e7538
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Region = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 2,INTEGER))
+		lineageTag: 31afab9f-6d0c-4f3a-bf68-92b4f6eab7cb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Country = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 3,INTEGER))
+		lineageTag: 4cb874aa-496c-4d67-9073-c1ec9f006b32
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Organization L4' = LOOKUPVALUE( Organization[Organization Name], Organization[OrganizationKey]   ,   PATHITEM( Organization[OrganizationPath], 4,INTEGER))
+		lineageTag: 0540ebd3-94f1-4951-8961-4d9f5e84e965
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	hierarchy Organization
+		lineageTag: 95443de8-6424-45e1-b950-8712ee8b6a1e
+
+		level Company
+			lineageTag: 08ff86ca-24a9-4ab6-9028-62f6cdc97da6
+			column: Company
+
+		level Region
+			lineageTag: 9fff7e60-7633-4f11-aed5-e73389a3acc9
+			column: Region
+
+		level Country
+			lineageTag: 4ee50e9c-7f6b-4116-aef3-6aebded6c306
+			column: Country
+
+		level Division
+			lineageTag: e41a3d7c-375a-46a4-8f97-cdc72cfa6073
+			column: 'Organization L4'
+
+	partition Organization-d9ef92dd-2885-427f-bb6c-29b8742818b8 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017"),
+				    dbo_DimOrganization = Source{[Schema="dbo",Item="DimOrganization"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimOrganization,{{"OrganizationName", "Organization Name"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
