@@ -1,0 +1,307 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "349849195002436168c8",
+  "position": {
+    "x": 9.530900967982129,
+    "y": 81.965748324646313,
+    "z": 0,
+    "height": 617.60238272524191,
+    "width": 564.229337304542
+  },
+  "visual": {
+    "visualType": "pivotTable",
+    "query": {
+      "queryState": {
+        "Columns": {
+          "projections": [
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Department"
+                        }
+                      },
+                      "Hierarchy": "Department Hierarchy"
+                    }
+                  },
+                  "Level": "Department Group"
+                }
+              },
+              "queryRef": "Department.Department Hierarchy.Department Group",
+              "nativeQueryRef": "Department Hierarchy Department Group",
+              "active": true
+            },
+            {
+              "field": {
+                "HierarchyLevel": {
+                  "Expression": {
+                    "Hierarchy": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Entity": "Department"
+                        }
+                      },
+                      "Hierarchy": "Department Hierarchy"
+                    }
+                  },
+                  "Level": "Sub Department"
+                }
+              },
+              "queryRef": "Department.Department Hierarchy.Sub Department",
+              "nativeQueryRef": "Department Hierarchy Sub Department",
+              "active": true
+            }
+          ]
+        },
+        "Rows": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Statement"
+                    }
+                  },
+                  "Property": "Line Item"
+                }
+              },
+              "queryRef": "Statement.Line Item",
+              "nativeQueryRef": "Line Item",
+              "active": true
+            }
+          ]
+        },
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Ledger"
+                    }
+                  },
+                  "Property": "Actual"
+                }
+              },
+              "queryRef": "General Ledger.Actual",
+              "nativeQueryRef": "Actual"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Ledger"
+                    }
+                  },
+                  "Property": "Budget"
+                }
+              },
+              "queryRef": "General Ledger.Budget",
+              "nativeQueryRef": "Budget"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Ledger"
+                    }
+                  },
+                  "Property": "Δ to Budget%"
+                }
+              },
+              "queryRef": "General Ledger.Δ to Budget%",
+              "nativeQueryRef": "Δ to Budget%"
+            }
+          ]
+        }
+      }
+    },
+    "objects": {
+      "subTotals": [
+        {
+          "properties": {
+            "rowSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "columnSubtotals": {
+              "expr": {
+                "Literal": {
+                  "Value": "false"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "0bf649a201ec4045d8eb",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Actual"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "ba96bc6001086bed9eca",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Budget"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "c013630ac34e3c064dd7",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Δ to Budget%"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "1c47921020b1ccb9dd6a",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Department"
+                  }
+                },
+                "Hierarchy": "Department Hierarchy"
+              }
+            },
+            "Level": "Department Group"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "251ad68b58c69bdd4cba",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Department"
+                  }
+                },
+                "Hierarchy": "Department Hierarchy"
+              }
+            },
+            "Level": "Sub Department"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "696de6f24d369089e705",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Statement"
+              }
+            },
+            "Property": "Line Item"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "b66c383333c90e406080",
+        "field": {
+          "HierarchyLevel": {
+            "Expression": {
+              "Hierarchy": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Department"
+                  }
+                },
+                "Hierarchy": "Department Hierarchy"
+              }
+            },
+            "Level": "Department Group"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "d",
+              "Entity": "Department",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "d"
+                          }
+                        },
+                        "Property": "Department Group"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'Corporate'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        },
+        "howCreated": "Drill"
+      }
+    ]
+  }
+}

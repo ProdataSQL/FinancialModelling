@@ -1,0 +1,341 @@
+table 'General Ledger'
+	lineageTag: d5752805-8ab9-47a6-97e9-298dfa17e7ad
+
+	measure 'GL Amount' = ```
+			
+			VAR s =   SELECTEDVALUE(Scenario[Scenario],"Actual") RETURN   CALCULATE(sum('General Ledger'[BaseAmount] ), Scenario[Scenario] =s)     
+			```
+		formatString: #,0.00
+		lineageTag: 03eebc76-04dc-401a-bd1a-34b13861197a
+
+	measure 'GL Budget' = ```
+			VAR s =   SELECTEDVALUE(Scenario[Scenario],"Budget") RETURN   CALCULATE([GL Amount], Scenario[Scenario] =s) 
+			```
+		formatString: #,0.00
+		displayFolder: _GL
+		lineageTag: 476092d9-2f83-4aa1-8bc6-0b679b62b85e
+
+	measure 'GL Variance' = [GL Actual] -[GL Budget]
+		formatString: #,0.00
+		displayFolder: _GL
+		lineageTag: 22b3015e-a473-44e7-a13d-49963f593c66
+
+	measure 'GL Variance%' = ```
+			DIVIDE([GL Variance] ,[GL Budget])
+			
+			```
+		displayFolder: _GL
+		lineageTag: 4be609d4-14ca-48ff-bb61-7e5d04ea410f
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL Opening Balance' = var MaxPeriod =MIN('Date'[Fiscal Period No] ) RETURN CALCULATE( [GL Amount] , all('Date'), 'Date'[Fiscal Period No] < MaxPeriod)
+		formatString: #,0
+		displayFolder: _GL
+		lineageTag: 303e507a-8127-4953-884b-480ff48e69fb
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL Closing Balance' = var MaxPeriod =max('Date'[Fiscal Period No] ) RETURN CALCULATE( [GL Amount] , all('Date'), 'Date'[Fiscal Period No] <= MaxPeriod)
+		formatString: #,0
+		displayFolder: _GL
+		lineageTag: 8f0f9786-c483-4b5d-ab50-db02664bca0f
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL Movement' = ```
+			[GL Amount] 
+			```
+		formatString: #,0
+		displayFolder: _GL
+		lineageTag: 63216da7-5015-4ae0-8701-ca15cff58345
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL Amount Value' = ```
+			VAR s =   SELECTEDVALUE(Scenario[Scenario],"Actual") RETURN   CALCULATE(sum('General Ledger'[BaseAmount] ), Scenario[Scenario] =s)     
+			```
+		formatString: #,0
+		displayFolder: _Internal
+		lineageTag: 1f6ea3d2-7471-451a-8ded-38274565ba30
+
+		annotation PBI_FormatHint = {"isDecimal":true}
+
+	measure 'GL Amount KPI' = ```
+			
+			var a = CALCULATE([GL Amount], Metrics[Ordinal]=1)
+			var b = CALCULATE([GL Amount], Metrics[Ordinal]=2)
+			RETURN DIVIDE(a,b)
+			
+			```
+		displayFolder: _Internal
+		lineageTag: 635bf0b1-7c7b-4363-80b7-bb3ce4a30fc0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Actual = CALCULATE([Metric Value], Scenario[Scenario] ="Actual")
+		displayFolder: _P&L
+		lineageTag: 47bd80a9-cf96-48d7-bff9-19044813a3ba
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Target = ```
+			VAR s =   SELECTEDVALUE(Scenario[Scenario],"Budget") RETURN   CALCULATE([Metric Value], Scenario[Scenario] =s) 
+			```
+		displayFolder: _Target
+		lineageTag: dbed5956-0402-446b-84e8-9f259f950f38
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Target Var' = [Actual]-[Target]
+		displayFolder: _Target
+		lineageTag: 7245d5e1-b3b9-40fe-b0a4-5fa1d84ce421
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Target Var %' = ```
+			VAR s =   SELECTEDVALUE(Scenario[Scenario],"Budget") RETURN   CALCULATE([GL Variance%], Scenario[Scenario] =s) 
+			```
+		displayFolder: _Target
+		lineageTag: c6407071-36dc-42ee-9ff4-82986b895c85
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Actual PY' = CALCULATE( [Actual], 'Time Intelligence'[Time Calc] ="PY")
+		displayFolder: _PY
+		lineageTag: 81bc06b3-4e88-4201-9c2b-3b35f92e7ad1
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Actual PY Var' = [Actual]-[Actual PY]
+		displayFolder: _PY
+		lineageTag: 17fe09e4-e47e-4cfe-b737-f565b947cf41
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Actual PY Var %' = ```
+			DIVIDE([Actual PY Var] ,[Actual PY])
+			
+			```
+		displayFolder: _PY
+		lineageTag: cb0ba66f-5ab6-4dc9-8d34-692fb088f0f8
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Forecast = CALCULATE( [Metric Value], Scenario[Scenario]="Forecast")
+		displayFolder: _Forecast
+		lineageTag: 2df3c528-6707-45d1-a55f-92bdfcac8d33
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast Var' = CALCULATE([Target Var], Scenario[Scenario]="Forecast")
+		displayFolder: _Forecast
+		lineageTag: 2148628f-79e8-4a01-a0cb-f4f7f279ab23
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast Var %' = CALCULATE([Target Var %], Scenario[Scenario]="Forecast")
+		displayFolder: _Forecast
+		lineageTag: e3b0156e-42c2-4267-a796-1a5a753d6abf
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast 1+11' = CALCULATE([Metric Value], Scenario[Scenario]="Forecast 1+11")
+		displayFolder: _Forecast
+		lineageTag: dd9c639f-eb29-4296-97f1-7e329bd45fc6
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast 1+11 Var' = CALCULATE([Target Var],Scenario[Scenario]="Forecast 1+11")
+		displayFolder: _Forecast
+		lineageTag: 9a9cdcab-6f4e-4cd8-a11c-ad2512907902
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Forecast 1+11 Var %' = CALCULATE([Target Var %],Scenario[Scenario]="Forecast 1+11")
+		displayFolder: _Forecast
+		lineageTag: 9adc7919-6ba4-42db-9d1f-20f873c4cc45
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Metric Value' =
+			
+			VAR MetricType= if(HASONEVALUE(Metrics[Level 1]), "", SELECTEDVALUE(Metrics[Metric Type]))
+			RETURN
+			switch (MetricType
+			, "Percentage", [GL Amount KPI]
+			, [GL Amount])
+		displayFolder: _Metric
+		lineageTag: e4a4cfde-d71a-468b-91fd-3634d8747062
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Budget = CALCULATE([Metric Value], Scenario[Scenario] ="Budget")
+		displayFolder: _P&L
+		lineageTag: 8ceeab39-17a4-4e69-ac6e-12ea7e21c281
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'GL Actual' = CALCULATE(sum('General Ledger'[BaseAmount]), Scenario[Scenario]="Actual")
+		displayFolder: _GL
+		lineageTag: f1cad3e4-b34e-46cf-a7ec-bb40243b89df
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ to Budget' = ```
+			[Actual] - [Budget]
+			
+			```
+		displayFolder: _P&L
+		lineageTag: 3d8fc1e3-e134-4d95-bbf6-759a1ee34ad0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Δ to Budget%' =
+			
+			VAR a =[Actual]
+			VAR b = [Budget]
+			RETURN
+			DIVIDE(a-b,b)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _P&L
+		lineageTag: b7b8589c-539a-49d8-8d7a-08c6b4d05945
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cc4d2211-d0ab-47e0-8351-a74d88171dfd
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrganizationKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: a20d5de6-ef17-4a7f-bc0d-de0a2c9de883
+		summarizeBy: none
+		sourceColumn: OrganizationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FinanceKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 13377858-e94c-4cfe-8c62-dd88d5052f41
+		summarizeBy: none
+		sourceColumn: FinanceKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+	column DepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e3156731-cc0c-4a76-9431-966d736c6fc5
+		summarizeBy: none
+		sourceColumn: DepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ScenarioKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ef39c98d-f44a-4da1-924a-b39e2914111b
+		summarizeBy: none
+		sourceColumn: ScenarioKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3a988a7f-9586-4332-b651-6f322666ef0e
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isHidden
+		formatString: Long Date
+		lineageTag: 884066cd-002f-402c-8091-baec57be6116
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Account Type'
+		dataType: string
+		isHidden
+		lineageTag: f148ecd1-143f-4d5e-bd7e-0f7de2ab98af
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column BaseAmount
+		dataType: decimal
+		isHidden
+		formatString: "€"#,0.###############;-"€"#,0.###############;"€"#,0.###############
+		lineageTag: fb1d0000-4274-45a2-914b-bef241553846
+		summarizeBy: none
+		sourceColumn: BaseAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-IE"}
+
+	partition 'General Ledger-d699db49-9681-49fc-b81e-bf1140f35c13' = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Source =
+				        Csv.Document(
+				            File.Contents(Files & "Transactions.csv"),
+				            [Delimiter = ",", Columns = 8, Encoding = 1252, QuoteStyle = QuoteStyle.None]
+				        ),
+				    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"FinanceKey", Int64.Type}, {"DateKey", Int64.Type}, {"OrganizationKey", Int64.Type}, {"DepartmentGroupKey", Int64.Type}, {"ScenarioKey", Int64.Type}, {"AccountKey", Int64.Type}, {"Amount", type number}, {"Date", type datetime}}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Changed Type",{{"Date", type date}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type1", {"AccountKey"}, Account, {"AccountKey"}, "Account", JoinKind.Inner),
+				    #"Expanded Account1" = Table.ExpandTableColumn(#"Merged Queries", "Account", {"Account Type"}, {"Account Type"}),
+				    #"Apply Operator (+/-)" = Table.AddColumn(#"Expanded Account1", "BaseAmount", each ([Amount]  * (if [Account Type]="Expenditures" or [Account Type]="Liabilities" then -1 else 1 ))),
+				    #"Removed Columns" = Table.RemoveColumns(#"Apply Operator (+/-)",{"Amount"}),
+				    #"Changed Type2" = Table.TransformColumnTypes(#"Removed Columns",{{"BaseAmount", Currency.Type}})
+				in
+				    #"Changed Type2"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = General Ledger
+
+	annotation PBI_NavigationStepName = Navigation
+

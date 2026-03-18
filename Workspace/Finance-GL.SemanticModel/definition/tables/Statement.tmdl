@@ -1,0 +1,140 @@
+table Statement
+	lineageTag: 2200f172-a59f-4b42-84e7-8446279fbeca
+
+	measure 'LineNo Count' = COUNTROWS('Statement')
+		formatString: 0
+		lineageTag: a6be6aca-8b7f-47a4-888c-35a663f01094
+
+	column Operator
+		dataType: string
+		lineageTag: dbda88a2-be39-4b11-8674-f06f51e0e8a3
+		summarizeBy: none
+		sourceColumn: Operator
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report
+		dataType: string
+		lineageTag: 327b7f23-b099-4e93-9129-48c9be9d5b92
+		summarizeBy: none
+		sourceColumn: Report
+
+		annotation SummarizationSetBy = Automatic
+
+	column LineNo
+		dataType: int64
+		formatString: 0
+		lineageTag: 8598951f-96a7-4aaa-ba56-d5d3296b7e94
+		summarizeBy: sum
+		sourceColumn: LineNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column Signage
+		dataType: int64
+		lineageTag: 96e2f69d-8266-4d4a-87fc-24a9fe7652be
+		summarizeBy: sum
+		sourceColumn: Signage
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Line Item'
+		dataType: string
+		lineageTag: 1ca07f4d-8e5e-4b21-836f-49becbc7fe68
+		summarizeBy: none
+		sourceColumn: Line Item
+		sortByColumn: FirstLineNo
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column Metric
+		dataType: string
+		lineageTag: 237e6fa6-7573-40b9-aa68-b9d4a900d322
+		summarizeBy: none
+		sourceColumn: Metric
+
+		annotation SummarizationSetBy = Automatic
+
+	column FirstLineNo
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 510828ce-c96e-49b4-ab03-424d32e57050
+		summarizeBy: sum
+		sourceColumn: FirstLineNo
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Metric ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 5dfa1d5a-abb2-403e-9f5c-911eac30d206
+		summarizeBy: none
+		sourceColumn: Metric ID
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Statement-63ad57e2-cdef-404b-868c-19112537ee5b = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Workbook = Excel.Workbook(File.Contents(Files & "Statement.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Statement",Kind="Sheet"]}[Data],
+				    Source = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+				    #"Changed Type" =
+				        Table.TransformColumnTypes(
+				            Source,
+				            {
+				                {"LineNo", Int64.Type},
+				                {"Report", type text},
+				                {"Line Item", type text},
+				                {"Metric", type text},
+				                {"Operator", type text},
+				                {"Signage", Int64.Type}
+				            }
+				        ),
+				
+				    FirstLineNoTable =
+				        Table.Group(
+				            #"Changed Type",
+				            {"Line Item"},
+				            {
+				                {"FirstLineNo", each List.Min([LineNo]), Int64.Type}
+				            }
+				        ),
+				
+				    #"Merged FirstLineNo" =
+				        Table.NestedJoin(
+				            #"Changed Type",
+				            {"Line Item"},
+				            FirstLineNoTable,
+				            {"Line Item"},
+				            "First",
+				            JoinKind.LeftOuter
+				        ),
+				
+				    #"Expanded FirstLineNo" =
+				        Table.ExpandTableColumn(
+				            #"Merged FirstLineNo",
+				            "First",
+				            {"FirstLineNo"}
+				        ),
+				    #"Merged Queries" = Table.NestedJoin(#"Expanded FirstLineNo", {"Metric"}, #"Unique Metrics", {"Metric"}, "Stastement-Metric", JoinKind.LeftOuter),
+				    #"Expanded Stastement-Metric" = Table.ExpandTableColumn(#"Merged Queries", "Stastement-Metric", {"Metric ID"}, {"Metric ID"}),
+				    #"Changed Type1" = Table.TransformColumnTypes(#"Expanded Stastement-Metric",{{"Metric ID", Int64.Type}})
+				in
+				    #"Changed Type1"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Finanical Report
+
+	annotation PBI_NavigationStepName = Navigation
+

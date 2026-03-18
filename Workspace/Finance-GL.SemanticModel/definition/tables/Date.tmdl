@@ -1,0 +1,122 @@
+table Date
+	lineageTag: cdee79c6-5211-4304-921e-91740bfdc0db
+	dataCategory: Time
+
+	measure MaxDate = max('Date'[Date])
+		formatString: General Date
+		lineageTag: 68d9ca2e-b185-48f3-a9eb-1d89ba60e4e3
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 05df16dc-9e75-4d65-b54b-9c206e6000bc
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: dd/mm/yyyy
+		lineageTag: 021eb795-bf35-4760-8b58-1024bce04468
+		summarizeBy: none
+		sourceColumn: Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column Month
+		dataType: string
+		lineageTag: 467e5eb2-1cea-4f7c-9e6c-9c7e0bd7f9be
+		summarizeBy: none
+		sourceColumn: Month
+		sortByColumn: 'Month No'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 8c962144-1893-43ab-a84f-a6d7c6550440
+		summarizeBy: none
+		sourceColumn: Month No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Year'
+		dataType: int64
+		formatString: 0
+		lineageTag: bf7a0020-d4c4-44c4-91d1-db701806c607
+		summarizeBy: none
+		sourceColumn: Fiscal Year
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Quarter'
+		dataType: int64
+		formatString: 0
+		lineageTag: f84945d5-9133-4712-b602-881c9d13d1af
+		summarizeBy: none
+		sourceColumn: Fiscal Quarter
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period No'
+		dataType: int64
+		formatString: 0
+		lineageTag: 56a0a4ae-cad2-4d35-8c65-b052cfc22227
+		summarizeBy: none
+		sourceColumn: Fiscal Period No
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Fiscal Period'
+		dataType: string
+		lineageTag: b8710815-c524-45ae-afc1-9aa0234827da
+		summarizeBy: none
+		sourceColumn: Fiscal Period
+		sortByColumn: 'Fiscal Period No'
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Fiscal Calendar'
+		lineageTag: 067a2a81-6269-47e7-9cb3-f1cc15b17550
+
+		level Year
+			lineageTag: 2e612ba2-b3e4-4447-8740-b900f56c89a0
+			column: 'Fiscal Year'
+
+		level 'Fiscal Period'
+			lineageTag: 1ef439b0-18af-41fc-8423-5d603d1c3281
+			column: 'Fiscal Period'
+
+	partition Date-09ab7aeb-ed6f-4f1a-ae77-5e5a9261c99b = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Workbook= Excel.Workbook(File.Contents(Files & "Calendar.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    Source= Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+				     #"Renamed Columns" = Table.RenameColumns(Source,{{"FullDateAlternateKey", "Date"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"CalendarQuarter", "CalendarSemester", "CalendarYear", "DayNumberOfMonth", "DayNumberOfWeek", "DayNumberOfYear", "EnglishDayNameOfWeek"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"EnglishMonthName", "MonthOfYear"}, {"FiscalQuarter", "Fiscal Quarter"}}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Renamed Columns1",{"FiscalSemester"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Removed Columns1",{{"FiscalYear", "Fiscal Year"}}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Renamed Columns2",{"FrenchMonthName", "FrenchDayNameOfWeek", "SpanishDayNameOfWeek", "SpanishMonthName", "WeekNumberOfYear"}),
+				    #"Renamed Columns3" = Table.RenameColumns(#"Removed Columns2",{{"MonthOfYear", "Month"}, {"MonthNumberOfYear", "Month No"}, {"FiscalPeriod", "Fiscal Period"}, {"FiscalPeriodNo", "Fiscal Period No"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns3",{{"DateKey", Int64.Type}, {"Date", type date}, {"Month No", Int64.Type}, {"Fiscal Quarter", Int64.Type}, {"Fiscal Year", Int64.Type}, {"Fiscal Period No", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

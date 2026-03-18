@@ -1,0 +1,75 @@
+table '_FP P&L Columns'
+	lineageTag: b700bd73-b816-4fb6-bb28-c4f14157f2f0
+
+	column 'P&L Columns'
+		lineageTag: 0eec2744-0489-4df6-a1dd-a74610dd346a
+		summarizeBy: none
+		sourceColumn: [Value1]
+		sortByColumn: 'Parameter Order'
+
+		relatedColumnDetails
+			groupByColumn: 'Parameter Fields'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Fields'
+		isHidden
+		lineageTag: 7be1fc77-4fc4-4d5a-b0a4-711fb2acc062
+		summarizeBy: none
+		sourceColumn: [Value2]
+		sortByColumn: 'Parameter Order'
+
+		extendedProperty ParameterMetadata =
+				{
+				  "version": 3,
+				  "kind": 2
+				}
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parameter Order'
+		isHidden
+		formatString: 0
+		lineageTag: 21862c6a-4bf9-4e3d-b4e2-c97fd14fe050
+		summarizeBy: sum
+		sourceColumn: [Value3]
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'P&L Scenario'
+		lineageTag: 1d3daff3-434b-48b9-bfc6-60e386859b8d
+		summarizeBy: none
+		sourceColumn: [Value4]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition '_FP P&L Columns-441d653b-eb73-4a32-92a1-2c7e2ce9b27e' = calculated
+		mode: import
+		source = ```
+				{
+				    ("Actual", NAMEOF('General Ledger'[Actual]), 0,"Budget"),
+				    ("Budget", NAMEOF('General Ledger'[Budget]), 1 ,"Budget"   ),
+				    ("GL Variance", NAMEOF('General Ledger'[Δ to Budget]), 2,"Budget" ),
+				    ("GL Variance%", NAMEOF('General Ledger'[Δ to Budget%]), 3,"Budget" ),
+				    ("PY", NAMEOF('General Ledger'[Actual PY]), 4,"Budget" ),
+				    ("PY Var %", NAMEOF('General Ledger'[Actual PY Var]), 5,"Budget" ),   
+				    ("PY Var %", NAMEOF('General Ledger'[Actual PY Var %]), 6,"Budget" ),
+				    ("Actual", NAMEOF('General Ledger'[Actual]), 0,"Forecast"),
+				    ("Forecast", NAMEOF('General Ledger'[Forecast]), 4,"Forecast"),
+				    ("Forecast Var", NAMEOF('General Ledger'[Forecast Var]), 5,"Forecast"),
+				    ("Forecast Var %", NAMEOF('General Ledger'[Forecast Var %]), 6,"Forecast"),
+				    ("PY", NAMEOF('General Ledger'[Actual PY]), 7,"Forecast" ),
+				    ("PY Var %", NAMEOF('General Ledger'[Actual PY Var]), 8,"Forecast" ),   
+				    ("PY Var %", NAMEOF('General Ledger'[Actual PY Var %]), 9,"Forecast" ),
+				    ("Actual", NAMEOF('General Ledger'[Actual]), 0,"Forecast 1+11"),
+				    ("Forecast 1+11", NAMEOF('General Ledger'[Forecast 1+11]), 7,"Forecast 1+11"),
+				    ("Forecast 1+11 Var", NAMEOF('General Ledger'[Forecast 1+11 Var]), 8,"Forecast 1+11"),
+				    ("Forecast 1+11 Var %", NAMEOF('General Ledger'[Forecast 1+11 Var %]), 9,"Forecast 1+11"),
+				    ("PY", NAMEOF('General Ledger'[Actual PY]), 10,"Forecast 1+11"),
+				    ("PY Var", NAMEOF('General Ledger'[Actual PY Var]), 11,"Forecast 1+11"),
+				    ("PY Var %", NAMEOF('General Ledger'[Actual PY Var %]), 12,"Forecast 1+11")
+				}
+				```
+
+	annotation PBI_Id = df539c728d444c6d9372848c4a3eb968
+
