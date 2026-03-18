@@ -1,0 +1,230 @@
+table Account
+	lineageTag: 84b705ef-2283-4924-999f-fe249b0f073f
+
+	measure AccountScope = switch(TRUE(),  ISINSCOPE( Account[Account L6]), 6,  ISINSCOPE( Account[Account L5]), 5, ISINSCOPE( Account[Account L4]), 4, ISINSCOPE( Account[Account L3]), 3, ISINSCOPE(Account[Account L2]),2 )
+		formatString: 0
+		lineageTag: fa68e490-abd1-40a8-bcf7-c29290be3094
+
+	measure HideAccount = if(Account[AccountScope] <= min(Account[Account Depth]) ,1)
+		formatString: 0
+		lineageTag: 4ea8706d-0096-4593-929d-218cbf033679
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 20e8916d-c779-4bf6-9bbd-e9329b974eab
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentAccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: fa0e1e00-d7f8-4598-ba22-59a4ce2a7916
+		summarizeBy: none
+		sourceColumn: ParentAccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 51c984fd-07da-4c73-a567-ea7b2da647ec
+		summarizeBy: none
+		sourceColumn: Account Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Parent Account Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: e2e4cd54-1968-4a4f-823a-7af6c460a735
+		summarizeBy: none
+		sourceColumn: Parent Account Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Name'
+		dataType: string
+		lineageTag: 8ed6ced3-8404-4474-91ec-6b59193e92d2
+		summarizeBy: none
+		sourceColumn: Account Name
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account Type'
+		dataType: string
+		lineageTag: 2370c4f5-bbaa-4acb-8863-3059abf784b8
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Operator
+		dataType: string
+		lineageTag: 39017e86-af45-4ed1-bc34-bfd96aa5ac38
+		summarizeBy: none
+		sourceColumn: Operator
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CustomMembers
+		dataType: string
+		lineageTag: 39cefa27-1031-44a8-8c6e-5c5fcc1b725e
+		summarizeBy: none
+		sourceColumn: CustomMembers
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Value Type'
+		dataType: string
+		lineageTag: fd9668bf-2235-469e-ba69-e9ee7b2518d5
+		summarizeBy: none
+		sourceColumn: Value Type
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column CustomMemberOptions
+		dataType: string
+		lineageTag: be30c06a-71e9-4356-b27d-29f21d6f89cb
+		summarizeBy: none
+		sourceColumn: CustomMemberOptions
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column AccountPath = path(Account[AccountKey], Account[ParentAccountKey] )
+		isHidden
+		lineageTag: f80cdca3-99d9-4543-af81-30566db6206b
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column Report = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 1,INTEGER))
+		lineageTag: f8b7dbe1-e3be-4a81-90ba-a066d5dcbc05
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account L2' = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 2,INTEGER))
+		isHidden
+		lineageTag: ad01e655-2ef1-4b97-a882-82d88eebdd91
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account L3' = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 3,INTEGER))
+		isHidden
+		lineageTag: bfa5bffc-7a2f-4b32-bd31-1b950af9e537
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account L4' = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 4,INTEGER))
+		isHidden
+		lineageTag: 4d0fec15-03c4-4f37-9f3a-e71918cdb44c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account L5' = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 5,INTEGER))
+		isHidden
+		lineageTag: a089f92a-52b9-441b-b7c5-9f7c2de501bc
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account L6' = LOOKUPVALUE( Account[Account Name], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 6,INTEGER))
+		isHidden
+		lineageTag: 00f748b7-f699-4b6c-9abe-65aba35804b4
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	column 'Account Depth' = PATHLENGTH(Account[AccountPath] )
+		formatString: 0
+		lineageTag: ed2e6e0b-b92d-4c90-a24b-6b1bbb80f3d7
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy Account
+		lineageTag: 8280f174-2ace-423a-bfb9-147077bde59c
+
+		level 'Account L2'
+			lineageTag: 3022b963-63f8-4783-a0a4-fd53ea120013
+			column: 'Account L2'
+
+		level 'Account L3'
+			lineageTag: 980cefbc-18fb-44f8-b087-33bb5c8db935
+			column: 'Account L3'
+
+		level 'Account L4'
+			lineageTag: dd0379e7-d0d6-431a-9205-a3780f17625e
+			column: 'Account L4'
+
+		level 'Account L5'
+			lineageTag: 065ae8c0-b340-4bc6-9ed3-6772929d9f83
+			column: 'Account L5'
+
+		level 'Account L6'
+			lineageTag: 95e1b4ff-d7a5-46ae-b8b8-3a57988b2f39
+			column: 'Account L6'
+
+	hierarchy 'Account Type Hierarchy'
+		lineageTag: 87b3606a-5068-43bc-ad3a-b834c96fec70
+
+		level 'Account Type'
+			lineageTag: 3738dd78-f529-4fd3-864f-3f7a5937b886
+			column: 'Account Type'
+
+		level 'Account Depth'
+			lineageTag: 6da89d6b-4718-4be3-8918-4274468a53b4
+			column: 'Account Depth'
+
+	partition Account-f1b39765-9b25-4192-a248-07893818c1f2 = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017"),
+				    dbo_DimAccount = Source{[Schema="dbo",Item="DimAccount"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimAccount,{{"AccountCodeAlternateKey", "Account Code"}, {"AccountDescription", "Account Name"}, {"AccountType", "Account Type"}, {"ParentAccountCodeAlternateKey", "Parent Account Code"}, {"ValueType", "Value Type"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Account
+

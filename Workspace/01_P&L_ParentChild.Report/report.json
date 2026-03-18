@@ -1,0 +1,91 @@
+{
+  "config": "{\"version\":\"5.66\",\"themeCollection\":{\"baseTheme\":{\"name\":\"CY20SU07\",\"type\":2,\"version\":{\"visual\":\"1.8.50\",\"report\":\"2.0.50\",\"page\":\"1.3.50\"}}},\"activeSectionIndex\":0,\"defaultDrillFilterOtherVisuals\":true,\"slowDataSourceSettings\":{\"isCrossHighlightingDisabled\":false,\"isSlicerSelectionsButtonEnabled\":false,\"isFilterSelectionsButtonEnabled\":false,\"isFieldWellButtonEnabled\":false,\"isApplyAllButtonEnabled\":false},\"linguisticSchemaSyncVersion\":2,\"settings\":{\"useNewFilterPaneExperience\":true,\"allowChangeFilterTypes\":true,\"useStylableVisualContainerHeader\":true,\"exportDataMode\":1,\"useEnhancedTooltips\":false},\"objects\":{\"section\":[{\"properties\":{\"verticalAlignment\":{\"expr\":{\"Literal\":{\"Value\":\"'Top'\"}}}}}],\"outspacePane\":[{\"properties\":{\"expanded\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}",
+  "layoutOptimization": 0,
+  "resourcePackages": [
+    {
+      "resourcePackage": {
+        "disabled": false,
+        "items": [
+          {
+            "name": "CY20SU07",
+            "path": "BaseThemes/CY20SU07.json",
+            "type": 202
+          }
+        ],
+        "name": "SharedResources",
+        "type": 2
+      }
+    },
+    {
+      "resourcePackage": {
+        "items": [
+          {
+            "name": "powerKPIMatrixEB2381CC88A8425FBEB1B07FF57784E6.pbiviz.json",
+            "path": "powerKPIMatrixEB2381CC88A8425FBEB1B07FF57784E6.pbiviz.json",
+            "type": 5
+          }
+        ],
+        "name": "powerKPIMatrixEB2381CC88A8425FBEB1B07FF57784E6",
+        "type": 0
+      }
+    }
+  ],
+  "sections": [
+    {
+      "config": "{\"relationships\":[{\"source\":\"9c713f6373a587cc3f03\",\"target\":\"efc05b0ce32b0779656d\",\"type\":3}],\"objects\":{\"outspacePane\":[{\"properties\":{\"width\":{\"expr\":{\"Literal\":{\"Value\":\"266L\"}}}}}]},\"filterSortOrder\":3}",
+      "displayName": "2. Financial Report",
+      "displayOption": 1,
+      "filters": "[{\"name\":\"Filter22bac1873663cfe5b019\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Report\"}},\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Account\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Property\":\"Report\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'Net Income'\"}}]]}}}]},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{},\"isHiddenInViewMode\":true,\"ordinal\":0},{\"name\":\"Filterc208313be13aed2b225f\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Date\"}},\"Property\":\"Fiscal Year\"}},\"type\":\"Categorical\",\"howCreated\":1,\"objects\":{},\"ordinal\":1},{\"name\":\"Filtere214e600eb7d36bca2bd\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Date\"}},\"Property\":\"Fiscal Period\"}},\"type\":\"Categorical\",\"howCreated\":1,\"ordinal\":2},{\"name\":\"Filter715a6289687dd5792b21\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Department\"}},\"Property\":\"Department\"}},\"type\":\"Categorical\",\"howCreated\":1,\"ordinal\":3},{\"name\":\"Filtera5ee31c07f6bfdb36bd2\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Organization\"}},\"Property\":\"Region\"}},\"type\":\"Categorical\",\"howCreated\":1,\"ordinal\":4},{\"name\":\"Filter42606e5b1d75b0aa2343\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Organization\"}},\"Hierarchy\":\"Organization\"}},\"Level\":\"Division\"}},\"type\":\"Categorical\",\"howCreated\":1,\"ordinal\":5},{\"name\":\"Filter7bfdb864198fe9e8fff1\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Organization\"}},\"Property\":\"Country\"}},\"type\":\"Categorical\",\"howCreated\":1,\"ordinal\":6}]",
+      "height": 720.00,
+      "name": "ReportSection",
+      "visualContainers": [
+        {
+          "config": "{\"name\":\"9c713f6373a587cc3f03\",\"layouts\":[{\"id\":0,\"position\":{\"x\":880.4143472173146,\"y\":0,\"z\":2000,\"width\":160.3957131079967,\"height\":67.53503709810387}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Date.Month\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month\"},\"Name\":\"Date.Month\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Month\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"'August'\"}}]]}}}]}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 67.54,
+          "width": 160.40,
+          "x": 880.41,
+          "y": 0.00,
+          "z": 2000.00
+        },
+        {
+          "config": "{\"name\":\"a3cb21632766798b9308\",\"layouts\":[{\"id\":0,\"position\":{\"x\":24.334600760456272,\"y\":67.16349809885932,\"z\":0,\"width\":544.1216730038022,\"height\":639.5133079847909}}],\"singleVisual\":{\"visualType\":\"pivotTable\",\"projections\":{\"Rows\":[{\"queryRef\":\"Account.Account.Account L2\",\"active\":true},{\"queryRef\":\"Account.Account.Account L3\",\"active\":true},{\"queryRef\":\"Account.Account.Account L4\",\"active\":true},{\"queryRef\":\"Account.Account.Account L5\",\"active\":true},{\"queryRef\":\"Account.Account.Account L6\",\"active\":true}],\"Values\":[{\"queryRef\":\"General Ledger.GL Amount\"}],\"Columns\":[{\"queryRef\":\"Scenario.Scenario\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"a\",\"Entity\":\"Account\",\"Type\":0},{\"Name\":\"g\",\"Entity\":\"General Ledger\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Scenario\",\"Type\":0}],\"Select\":[{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L2\"},\"Name\":\"Account.Account.Account L2\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L3\"},\"Name\":\"Account.Account.Account L3\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L4\"},\"Name\":\"Account.Account.Account L4\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L5\"},\"Name\":\"Account.Account.Account L5\"},{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Source\":\"a\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L6\"},\"Name\":\"Account.Account.Account L6\"},{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"GL Amount\"},\"Name\":\"General Ledger.GL Amount\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Scenario\"},\"Name\":\"Scenario.Scenario\"}]},\"expansionStates\":[{\"roles\":[\"Rows\"],\"levels\":[{\"queryRefs\":[\"Account.Account.Account L2\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Account L2\"}}],\"isPinned\":true},{\"queryRefs\":[\"Account.Account.Account L3\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Account L3\"}}],\"isPinned\":true},{\"queryRefs\":[\"Account.Account.Account L4\"],\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Account L4\"}}],\"isPinned\":true},{\"queryRefs\":[\"Account.Account.Account L5\"],\"isCollapsed\":true,\"identityKeys\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Property\":\"Account L5\"}}],\"isPinned\":true},{\"queryRefs\":[\"Account.Account.Account L6\"],\"isCollapsed\":true,\"isPinned\":true}],\"root\":{\"identityValues\":null,\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Operating Profit'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Gross Margin'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Total Cost of Sales'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Net Sales'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Discounts'\"}}],\"isToggled\":true}]}]},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Operating Expenses'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Commissions'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Depreciation'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Labor Expenses'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Marketing'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Other Expenses'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Professional Services'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Rent'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Telephone and Utilities'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Travel Expenses'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Office Supplies'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"null\"}}],\"isToggled\":true}]}]}]},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Other Income and Expense'\"}}],\"children\":[{\"identityValues\":[{\"Literal\":{\"Value\":\"'Gain/Loss on Sales of Asset'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Interest Expense'\"}}],\"isToggled\":true},{\"identityValues\":[{\"Literal\":{\"Value\":\"'Interest Income'\"}}],\"isToggled\":true}]}]}}],\"drillFilterOtherVisuals\":true,\"filterSortOrder\":3,\"objects\":{\"columnWidth\":[{\"properties\":{\"value\":{\"expr\":{\"Literal\":{\"Value\":\"228.49436408589173D\"}}}},\"selector\":{\"metadata\":\"Account.Account.Account L2\"}}],\"subTotals\":[{\"properties\":{\"columnSubtotals\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}},\"rowSubtotalsLabel\":{\"expr\":{\"Literal\":{\"Value\":\"'Profit (or Loss)'\"}}}}}]}}}",
+          "filters": "[{\"name\":\"Filter422f1462f52b33621ab9\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Scenario\"}},\"Property\":\"Scenario\"}},\"type\":\"Categorical\",\"howCreated\":0,\"objects\":{},\"ordinal\":0},{\"name\":\"Filter0d108abde28b663c1d57\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L2\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":1},{\"name\":\"Filter784f1c8aca3246193005\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L3\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":2},{\"name\":\"Filter048f7613172b4f85773d\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L4\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":3},{\"name\":\"Filter9ecad5e09fbc3d125216\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L5\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":4},{\"name\":\"Filterd8268f74a747baac289f\",\"expression\":{\"HierarchyLevel\":{\"Expression\":{\"Hierarchy\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Account\"}},\"Hierarchy\":\"Account\"}},\"Level\":\"Account L6\"}},\"type\":\"Categorical\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":5},{\"name\":\"Filterfc355c9b08486c1d690e\",\"expression\":{\"Measure\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"General Ledger\"}},\"Property\":\"GL Amount\"}},\"type\":\"Advanced\",\"howCreated\":0,\"isHiddenInViewMode\":false,\"ordinal\":6},{\"name\":\"Filterb069de3344afbffcb484\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"General Ledger\"}},\"Property\":\"Operator\"}},\"type\":\"Categorical\",\"howCreated\":1,\"isHiddenInViewMode\":false,\"ordinal\":7},{\"name\":\"Filtere7ce128ff7c3c212b783\",\"expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"Scenario\"}},\"Property\":\"Scenario\"}},\"type\":\"Categorical\",\"howCreated\":1,\"isHiddenInViewMode\":false,\"ordinal\":8},{\"name\":\"Filterc90bf93cb9a1384c4321\",\"expression\":{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Entity\":\"General Ledger\"}},\"Property\":\"Amount\"}},\"Function\":0}},\"type\":\"Advanced\",\"howCreated\":1,\"isHiddenInViewMode\":false,\"ordinal\":9}]",
+          "height": 639.51,
+          "width": 544.12,
+          "x": 24.33,
+          "y": 67.16,
+          "z": 0.00
+        },
+        {
+          "config": "{\"name\":\"afae2afaa80367be7a47\",\"layouts\":[{\"id\":0,\"position\":{\"x\":728.4605137465808,\"y\":0,\"z\":1000,\"width\":151.9538334707337,\"height\":58.037922506183016}}],\"singleVisual\":{\"visualType\":\"slicer\",\"projections\":{\"Values\":[{\"queryRef\":\"Date.Fiscal Year\",\"active\":true}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Fiscal Year\"},\"Name\":\"Date.Fiscal Year\"}]},\"drillFilterOtherVisuals\":true,\"objects\":{\"data\":[{\"properties\":{\"mode\":{\"expr\":{\"Literal\":{\"Value\":\"'Dropdown'\"}}}}}],\"general\":[{\"properties\":{\"filter\":{\"filter\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0}],\"Where\":[{\"Condition\":{\"In\":{\"Expressions\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Fiscal Year\"}}],\"Values\":[[{\"Literal\":{\"Value\":\"2011L\"}}]]}}}]}}}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 58.04,
+          "width": 151.95,
+          "x": 728.46,
+          "y": 0.00,
+          "z": 1000.00
+        },
+        {
+          "config": "{\"name\":\"d906773d9c4675ad1a66\",\"layouts\":[{\"id\":0,\"position\":{\"x\":24.334600760456272,\"y\":15.574144486692015,\"z\":4000,\"width\":580.1368821292775,\"height\":41.85551330798479}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"Profit & Loss Statement\",\"textStyle\":{\"fontWeight\":\"bold\",\"fontSize\":\"18pt\"}}]}]}}]},\"vcObjects\":{\"visualHeader\":[{\"properties\":{\"show\":{\"expr\":{\"Literal\":{\"Value\":\"false\"}}}}}]}}}",
+          "filters": "[]",
+          "height": 41.86,
+          "width": 580.14,
+          "x": 24.33,
+          "y": 15.57,
+          "z": 4000.00
+        },
+        {
+          "config": "{\"name\":\"efc05b0ce32b0779656d\",\"layouts\":[{\"id\":0,\"position\":{\"x\":528.384,\"y\":67.584,\"z\":3000,\"width\":751.616,\"height\":638.976}}],\"singleVisual\":{\"visualType\":\"areaChart\",\"projections\":{\"Category\":[{\"queryRef\":\"Date.Fiscal Period\",\"active\":true}],\"Y\":[{\"queryRef\":\"Sum(General Ledger.Amount)\"}],\"Series\":[{\"queryRef\":\"Scenario.Scenario\"}]},\"prototypeQuery\":{\"Version\":2,\"From\":[{\"Name\":\"d\",\"Entity\":\"Date\",\"Type\":0},{\"Name\":\"g\",\"Entity\":\"General Ledger\",\"Type\":0},{\"Name\":\"s\",\"Entity\":\"Scenario\",\"Type\":0}],\"Select\":[{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"d\"}},\"Property\":\"Fiscal Period\"},\"Name\":\"Date.Fiscal Period\"},{\"Aggregation\":{\"Expression\":{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"g\"}},\"Property\":\"Amount\"}},\"Function\":0},\"Name\":\"Sum(General Ledger.Amount)\"},{\"Column\":{\"Expression\":{\"SourceRef\":{\"Source\":\"s\"}},\"Property\":\"Scenario\"},\"Name\":\"Scenario.Scenario\"}]},\"drillFilterOtherVisuals\":true}}",
+          "filters": "[]",
+          "height": 638.98,
+          "width": 751.62,
+          "x": 528.38,
+          "y": 67.58,
+          "z": 3000.00
+        }
+      ],
+      "width": 1280.00
+    }
+  ]
+}

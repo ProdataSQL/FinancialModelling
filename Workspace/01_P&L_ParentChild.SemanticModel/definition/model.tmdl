@@ -1,0 +1,21 @@
+model Model
+	culture: en-IE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-IE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation PBI_QueryOrder = ["General Ledger","Account","Department","Scenario","Organization","Date"]
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+ref table Account
+ref table 'General Ledger'
+ref table Department
+ref table Scenario
+ref table Organization
+ref table Date
+
+ref cultureInfo en-IE
+

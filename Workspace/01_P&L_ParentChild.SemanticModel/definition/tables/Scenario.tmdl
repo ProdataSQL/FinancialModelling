@@ -1,0 +1,37 @@
+table Scenario
+	lineageTag: 58754c98-3b71-4396-9865-294d59dd5e48
+
+	column ScenarioKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3c872def-0038-4049-b547-1c9c09dce7d4
+		summarizeBy: none
+		sourceColumn: ScenarioKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 11fc24bf-03b7-4745-819b-339df96b785f
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isText":true}
+
+	partition Scenario-180ddbc1-ecb6-47cf-a0a3-a068bda0bc9c = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("localhost", "AdventureWorksDW2017"),
+				    dbo_DimScenario = Source{[Schema="dbo",Item="DimScenario"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimScenario,{{"ScenarioName", "Scenario"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_ResultType = Table
+

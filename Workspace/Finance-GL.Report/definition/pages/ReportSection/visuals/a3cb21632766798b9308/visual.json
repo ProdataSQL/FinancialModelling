@@ -2,11 +2,11 @@
   "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
   "name": "a3cb21632766798b9308",
   "position": {
-    "x": 31.801242236024844,
-    "y": 65.369220151828841,
+    "x": 31.663258690339635,
+    "y": 65.369308263927,
     "z": 0,
-    "height": 641.32505175983431,
-    "width": 456.70117322291236
+    "height": 641.43633733978356,
+    "width": 503.54795272056259
   },
   "visual": {
     "visualType": "pivotTable",
@@ -183,6 +183,20 @@
               },
               "queryRef": "General Ledger.Δ to Budget",
               "nativeQueryRef": "Δ to Budget"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Ledger"
+                    }
+                  },
+                  "Property": "Δ to Budget%"
+                }
+              },
+              "queryRef": "General Ledger.Δ to Budget%",
+              "nativeQueryRef": "Δ to Budget%"
             }
           ]
         }
@@ -536,6 +550,160 @@
         },
         "type": "Advanced",
         "howCreated": "User"
+      },
+      {
+        "name": "0af5692f4cd22d9b149f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Display Unit"
+              }
+            },
+            "Property": "Display Unit"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "65bc309e9aab16abacd2",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 1"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5f479767f65c8257e728",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 2"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8b9492bf1ac54c829d3e",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 3"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8e22e7695539e2d6a6b5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 4"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "45422b457943b8e0e8e1",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 5"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "181d0908890c720b033c",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Level 6"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "872348ab39914815faea",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Actual"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "72a985a1d90c68bf3ef4",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Budget"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "39b5ea4343b34972b580",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Δ to Budget"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "00bee31cc8e43c363f97",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Δ to Budget%"
+          }
+        },
+        "type": "Advanced"
       }
     ],
     "filterSortOrder": "Custom"
