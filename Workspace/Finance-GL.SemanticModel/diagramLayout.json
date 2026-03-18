@@ -1,0 +1,245 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 128.80000305175781,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Account",
+          "size": {
+            "height": 494,
+            "width": 333
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 998.1,
+            "y": 0
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 337,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 534
+          },
+          "nodeIndex": "Department",
+          "size": {
+            "height": 251,
+            "width": 325
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 524.5,
+            "y": 255.6
+          },
+          "nodeIndex": "General Ledger",
+          "size": {
+            "height": 432,
+            "width": 242
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 525.6,
+            "y": 0
+          },
+          "nodeIndex": "Organization",
+          "size": {
+            "height": 202,
+            "width": 242
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 868.8,
+            "y": 398.5
+          },
+          "nodeIndex": "Scenario",
+          "size": {
+            "height": 145,
+            "width": 242
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1296.3,
+            "y": 0
+          },
+          "nodeIndex": "Statement",
+          "size": {
+            "height": 175,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2148.3,
+            "y": 328.5
+          },
+          "nodeIndex": "Time Intelligence",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2716.3,
+            "y": 242.5
+          },
+          "nodeIndex": "Metrics",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {},
+          "nodeIndex": "Display Unit",
+          "nodeLineageTag": "624d3e30-64cb-4a82-ac44-6f9d47702bcf",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2432.3,
+            "y": 316.5
+          },
+          "nodeIndex": "_FP P&L Columns",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 705.70860927152319,
+            "y": 0
+          },
+          "nodeIndex": "Account",
+          "nodeLineageTag": "1f65123f-ab9a-44f3-88c8-4733ba347f24",
+          "size": {
+            "height": 540.39735099337747,
+            "width": 238
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 1083.6622516556292,
+            "y": 0
+          },
+          "nodeIndex": "General Ledger",
+          "nodeLineageTag": "d5752805-8ab9-47a6-97e9-298dfa17e7ad",
+          "size": {
+            "height": 937.78807947019868,
+            "width": 300
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 0
+          },
+          "nodeIndex": "Statement",
+          "nodeLineageTag": "2200f172-a59f-4b42-84e7-8446279fbeca",
+          "size": {
+            "height": 415.58278145695368,
+            "width": 244.64900662251659
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 405.61589505025097,
+            "y": 467.91390728476813
+          },
+          "nodeIndex": "Metrics",
+          "size": {
+            "height": 605.9602649006622,
+            "width": 234
+          },
+          "zIndex": 4
+        }
+      ],
+      "name": "Metrics",
+      "zoomValue": 75.5,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 85,
+            "y": 367
+          },
+          "nodeIndex": "Date",
+          "size": {
+            "height": 308,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "Sales",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "Metrics",
+  "defaultDiagram": "All tables"
+}

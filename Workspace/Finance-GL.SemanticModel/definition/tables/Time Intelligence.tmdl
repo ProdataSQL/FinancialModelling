@@ -1,0 +1,60 @@
+table 'Time Intelligence'
+	lineageTag: e733f90c-be28-40f8-8f78-b39e06824307
+
+	calculationGroup
+		precedence: 1
+
+		calculationItem Current = SELECTEDMEASURE ()
+
+		calculationItem YTD = CALCULATE ( SELECTEDMEASURE (), DATESYTD ( 'Date'[Date] ) )
+
+		calculationItem PY = CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+
+		calculationItem 'PY YTD' =
+				VAR _return =
+				    CALCULATE (
+				        CALCULATE ( SELECTEDMEASURE (), DATESYTD ( 'Date'[Date] ) ),
+				        CALCULATETABLE ( DATEADD ( 'Date'[Date], - 1, YEAR ) )
+				    )
+				RETURN
+				    _return
+
+		calculationItem YoY =
+				VAR _current =
+				    SELECTEDMEASURE ()
+				VAR _py =
+				    CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				VAR _yoy = _current - _py
+				RETURN
+				    IF ( OR ( ISBLANK ( _current ), ISBLANK ( _py ) ), BLANK (), _yoy )
+
+		calculationItem YoY% =
+				VAR _current =
+				    SELECTEDMEASURE ()
+				VAR _py =
+				    CALCULATE ( SELECTEDMEASURE (), SAMEPERIODLASTYEAR ( 'Date'[Date] ) )
+				VAR _yoy =
+				    IF ( NOT ISBLANK ( _current ) && NOT ISBLANK ( _py ), _current - _py )
+				VAR _result =
+				    DIVIDE ( _yoy, _py )
+				RETURN
+				    _result
+
+	column 'Time Calc'
+		dataType: string
+		lineageTag: 822864b5-9462-40b7-ac58-fb9393699802
+		summarizeBy: none
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: 323b5f14-edc9-4810-8a20-b19ce5cfb69e
+		summarizeBy: sum
+		sourceColumn: Ordinal
+
+		annotation SummarizationSetBy = Automatic
+
