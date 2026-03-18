@@ -1,0 +1,84 @@
+table Department
+	lineageTag: 10d3d236-28c6-41e6-b38f-2a120d24294b
+
+	column DepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: eb6c64d2-ca9a-49a5-a4b3-19f12068be89
+		summarizeBy: none
+		sourceColumn: DepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentDepartmentGroupKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: d37cb775-e28c-42ae-9ae5-55904c1b2085
+		summarizeBy: none
+		sourceColumn: ParentDepartmentGroupKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Department Name'
+		dataType: string
+		lineageTag: 39c05bdc-7fe5-457d-8948-f9bc8857a787
+		summarizeBy: none
+		sourceColumn: Department Name
+
+		annotation SummarizationSetBy = Automatic
+
+	column DepartmentPath = path('Department'[DepartmentGroupKey], 'Department'[ParentDepartmentGroupKey])
+		lineageTag: c142c476-4f3b-4729-98c2-c96d055552a9
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation BestPracticeAnalyzer_IgnoreRules = {"RuleIDs":["NO_CAMELCASE_COLUMNS_HIERARCHIES"]}
+
+	column 'Department Group' = LOOKUPVALUE( Department[Department Name], Department[DepartmentGroupKey]  ,   PATHITEM( Department[DepartmentPath], 1,INTEGER))
+		lineageTag: a62bdee6-a98e-4d73-9feb-68c5e816d468
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Department = LOOKUPVALUE( Department[Department Name], Department[DepartmentGroupKey]  ,   PATHITEM( Department[DepartmentPath], 2,INTEGER))
+		lineageTag: 23b9d449-f714-4c84-8f3a-c252a9ff603f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	hierarchy 'Department Hierarchy'
+		lineageTag: 5426c399-0992-4b58-9c73-7e562d035dc9
+
+		level 'Department Group'
+			lineageTag: e697bb61-39ec-406c-b60d-776a322e9217
+			column: 'Department Group'
+
+		level 'Sub Department'
+			lineageTag: c477e8a7-e33b-4d07-888e-2cd2cb87e323
+			column: Department
+
+	partition Department-d6337107-b576-462b-b572-d473a86f9f30 = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Source = Csv.Document(File.Contents(Files & "DepartmentGroup.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    dbo_DimDepartmentGroup = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimDepartmentGroup,{{"DepartmentGroupName", "Department Name"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"DepartmentGroupKey", Int64.Type}, {"ParentDepartmentGroupKey", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Department
+
+	annotation PBI_NavigationStepName = Navigation
+

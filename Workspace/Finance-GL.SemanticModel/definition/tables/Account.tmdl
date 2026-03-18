@@ -1,0 +1,165 @@
+table Account
+	lineageTag: 1f65123f-ab9a-44f3-88c8-4733ba347f24
+
+	measure 'Acount Lines' = CALCULATE(COUNTROWS(Account), 'General Ledger')
+		lineageTag: 145e3793-4903-4cba-8e34-ace0335bee7e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: ad9005b1-86e8-49ca-894c-72ca5614bf59
+		summarizeBy: none
+		sourceColumn: AccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ParentAccountKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 67bc141b-3416-4d8f-bdd5-03f12ac078cf
+		summarizeBy: count
+		sourceColumn: ParentAccountKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Code'
+		dataType: int64
+		formatString: 0
+		lineageTag: 36701fb8-f968-4a93-93f7-2d1bdcdf0253
+		summarizeBy: none
+		sourceColumn: Account Code
+
+		annotation SummarizationSetBy = User
+
+	column Account
+		dataType: string
+		lineageTag: 8084b44b-440a-4b20-92b9-bd63636a4159
+		summarizeBy: none
+		sourceColumn: Account
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account Type'
+		dataType: string
+		lineageTag: a504a903-305b-48b6-9f78-950c8aa335a6
+		summarizeBy: none
+		sourceColumn: Account Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Operator
+		dataType: string
+		lineageTag: 194abac9-630b-499b-a17a-294652f4335d
+		summarizeBy: none
+		sourceColumn: Operator
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomMembers
+		dataType: string
+		isHidden
+		lineageTag: 2e2f4261-4955-4dd1-adfb-bd440a7f4c1b
+		summarizeBy: none
+		sourceColumn: CustomMembers
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Value Type'
+		dataType: string
+		lineageTag: 3a82d63e-0b22-4433-a333-82e4bdda0ad4
+		summarizeBy: none
+		sourceColumn: Value Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomMemberOptions
+		dataType: string
+		isHidden
+		lineageTag: 012d215d-f6c8-47d0-94ab-36920ea4f636
+		summarizeBy: none
+		sourceColumn: CustomMemberOptions
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column AccountPath = path(Account[AccountKey], Account[ParentAccountKey] )
+		isHidden
+		lineageTag: 1ace341b-d398-49c9-ab5c-b187dafaed8f
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column Report = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 1,INTEGER))
+		isHidden
+		lineageTag: 48ba6203-318e-4286-aefc-aee59e8fcaf8
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account L2' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 2,INTEGER))
+		isHidden
+		lineageTag: c4bb14bc-0ff4-421f-a595-ae54ced49d4e
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account L3' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 3,INTEGER))
+		isHidden
+		lineageTag: 49e6c63e-d442-4cd1-bbb2-7b19617cb63c
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account L4' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 4,INTEGER))
+		isHidden
+		lineageTag: 0d723852-a66c-461c-ab1c-5d9a9fa80ddb
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account L5' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 5,INTEGER))
+		isHidden
+		lineageTag: c4799b18-ea73-4f52-bbab-824af9cdadfe
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Account L6' = LOOKUPVALUE( Account[Account], Account[AccountKey]   ,   PATHITEM( Account[AccountPath], 6,INTEGER))
+		isHidden
+		lineageTag: dcbf5714-4ae4-4cd6-bb4d-87e7f79f1093
+		summarizeBy: none
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Account-f1b39765-9b25-4192-a248-07893818c1f2 = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Workbook= Excel.Workbook(File.Contents("C:\Projects\Github\FinancialModelling\Files\Account.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    dbo_DimAccount = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimAccount,{{"AccountCodeAlternateKey", "Account Code"}, {"AccountDescription", "Account Name"}, {"AccountType", "Account Type"}, {"ParentAccountCodeAlternateKey", "Parent Account Code"}, {"ValueType", "Value Type"}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Renamed Columns",{"Parent Account Code"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Removed Columns",{{"Account Name", "Account"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns1",{{"AccountKey", Int64.Type}, {"ParentAccountKey", Int64.Type}, {"Account Code", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation LinkedQueryName = Account
+
+	annotation PBI_NavigationStepName = Navigation
+

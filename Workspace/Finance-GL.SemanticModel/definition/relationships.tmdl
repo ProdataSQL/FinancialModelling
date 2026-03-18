@@ -1,0 +1,30 @@
+relationship f4aa0e09-ce9e-4d49-9822-a57fdc5363e2
+	fromColumn: 'General Ledger'.OrganizationKey
+	toColumn: Organization.OrganizationKey
+
+relationship 296c0dac-acaa-487b-ace8-4d6118073ab8
+	fromColumn: 'General Ledger'.DateKey
+	toColumn: Date.DateKey
+
+relationship bc931702-a639-4b45-92fb-fee72bd82ea6
+	fromColumn: 'General Ledger'.AccountKey
+	toColumn: Account.AccountKey
+
+relationship f0eefeab-44bf-4fc2-b20a-96f646abd14d
+	fromColumn: 'General Ledger'.DepartmentGroupKey
+	toColumn: Department.DepartmentGroupKey
+
+relationship fbf24dff-3cf2-45ed-9c8c-7af158d9c802
+	fromColumn: 'General Ledger'.ScenarioKey
+	toColumn: Scenario.ScenarioKey
+
+relationship ea77ec99-d695-99e8-e92e-dbb0f4e1a51e
+	toCardinality: many
+	fromColumn: Metrics.'Metric ID'
+	toColumn: Statement.'Metric ID'
+
+relationship 0f5430aa-50e3-d577-0f50-03e3f5597913
+	crossFilteringBehavior: bothDirections
+	fromColumn: Metrics.AccountKey
+	toColumn: Account.AccountKey
+

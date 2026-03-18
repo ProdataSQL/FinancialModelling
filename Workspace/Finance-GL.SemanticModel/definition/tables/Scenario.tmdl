@@ -1,0 +1,40 @@
+table Scenario
+	lineageTag: 766ad3df-babc-47ab-8d74-8d02e7f16987
+
+	column ScenarioKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8807df16-d478-47a5-833c-5327dcdd6209
+		summarizeBy: none
+		sourceColumn: ScenarioKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Scenario
+		dataType: string
+		lineageTag: 5fecbb8a-ebc8-4e82-88d2-107e8b4636c7
+		summarizeBy: none
+		sourceColumn: Scenario
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Scenario-180ddbc1-ecb6-47cf-a0a3-a068bda0bc9c = m
+		mode: import
+		queryGroup: 'Finance GL'
+		source =
+				let
+				    Workbook= Excel.Workbook(File.Contents(Files & "Scenario.xlsx"), null, true),
+				    Sheet = Workbook{[Item="Sheet1",Kind="Sheet"]}[Data],
+				    dbo_DimScenario = Table.PromoteHeaders(Sheet, [PromoteAllScalars=true]),
+				    #"Renamed Columns" = Table.RenameColumns(dbo_DimScenario,{{"ScenarioName", "Scenario"}}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Renamed Columns",{{"ScenarioKey", Int64.Type}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_ResultType = Table
+
+	annotation PBI_NavigationStepName = Navigation
+

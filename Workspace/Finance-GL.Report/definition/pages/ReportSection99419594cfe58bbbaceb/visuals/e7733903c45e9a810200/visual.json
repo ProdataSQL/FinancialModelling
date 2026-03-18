@@ -1,0 +1,100 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.7.0/schema.json",
+  "name": "e7733903c45e9a810200",
+  "position": {
+    "x": 29.976580796252929,
+    "y": 71.943793911007035,
+    "z": 4001,
+    "height": 648.49336455893831,
+    "width": 335.73770491803282
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Metrics"
+                    }
+                  },
+                  "Property": "Metric"
+                }
+              },
+              "queryRef": "Metrics.Metric",
+              "nativeQueryRef": "Metric"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "General Ledger"
+                    }
+                  },
+                  "Property": "Metric Value"
+                }
+              },
+              "queryRef": "General Ledger.Metric Value",
+              "nativeQueryRef": "Metric Value"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Metrics"
+                  }
+                },
+                "Property": "Metric"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "77e9e0c2cc1111721051",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Metrics"
+              }
+            },
+            "Property": "Metric"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "117dd90140c9d78e2b5d",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "General Ledger"
+              }
+            },
+            "Property": "Metric Value"
+          }
+        },
+        "type": "Advanced"
+      }
+    ]
+  }
+}
