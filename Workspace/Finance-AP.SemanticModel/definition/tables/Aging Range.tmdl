@@ -1,0 +1,60 @@
+table 'Aging Range'
+	lineageTag: 4094fd2c-c008-43f1-8f8d-dd44de7fe157
+
+	column Min
+		formatString: 0
+		lineageTag: 7a1d7e7d-aadb-4814-814f-7d404533ef20
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Min]
+
+		annotation SummarizationSetBy = User
+
+	column Max
+		formatString: 0
+		lineageTag: da24e85b-0528-470d-9c72-20d4982ef7cf
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Max]
+
+		annotation SummarizationSetBy = User
+
+	column Range
+		lineageTag: f31bb431-b65c-46b3-b6f9-64ea527dbdde
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [Range]
+		sortByColumn: Min
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Aging Range' = calculated
+		mode: import
+		source = ```
+				
+				VAR Buckets = 
+				    DATATABLE(
+				        "Min", INTEGER,
+				        "Max", INTEGER,
+				        {
+				            {-99999,-1},
+				            { 0, 30 },
+				            { 31, 60 },
+				            { 61, 120 },
+				            { 121, 99999 }
+				        }
+				    )
+				RETURN
+				ADDCOLUMNS(
+				    Buckets,
+				    "Range", 
+				    IF(  [Max] =-1,"Not Due",if(
+				        [Max] = 99999,
+				        FORMAT([Min], "0") & "+",
+				        FORMAT([Min], "0") & "-" & FORMAT([Max], "0"))
+				    )
+				)
+				```
+
+	annotation PBI_Id = bb0c4cd836264f62bace69b8bd82ed38
+

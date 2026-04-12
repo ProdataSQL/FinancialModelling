@@ -1,0 +1,280 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "aa1a52ad9719b7245c34",
+  "position": {
+    "x": 0,
+    "y": 100.85392336234462,
+    "z": 1000,
+    "height": 591.11605081818641,
+    "width": 756.40442521758462,
+    "tabOrder": 1000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Invoice"
+                    }
+                  },
+                  "Property": "Invoice ID"
+                }
+              },
+              "queryRef": "Invoice.Invoice ID",
+              "nativeQueryRef": "Invoice ID"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Invoice"
+                    }
+                  },
+                  "Property": "InvoiceNo"
+                }
+              },
+              "queryRef": "Invoice.InvoiceNo",
+              "nativeQueryRef": "InvoiceNo"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Invoice"
+                    }
+                  },
+                  "Property": "Invoice Date"
+                }
+              },
+              "queryRef": "Invoice.Invoice Date",
+              "nativeQueryRef": "Invoice Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Invoice"
+                    }
+                  },
+                  "Property": "Due Date"
+                }
+              },
+              "queryRef": "Invoice.Due Date",
+              "nativeQueryRef": "Due Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Invoice"
+                    }
+                  },
+                  "Property": "Paid Date"
+                }
+              },
+              "queryRef": "Invoice.Paid Date",
+              "nativeQueryRef": "Paid Date"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer"
+                    }
+                  },
+                  "Property": "Customer"
+                }
+              },
+              "queryRef": "Customer.Customer",
+              "nativeQueryRef": "Customer"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer"
+                    }
+                  },
+                  "Property": "Country"
+                }
+              },
+              "queryRef": "Customer.Country",
+              "nativeQueryRef": "Country"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "Invoiced Value"
+                }
+              },
+              "queryRef": "AR Transactions.Invoiced Value",
+              "nativeQueryRef": "Invoiced Value"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "AR Balance"
+                }
+              },
+              "queryRef": "AR Transactions.AR Balance",
+              "nativeQueryRef": "AR Balance"
+            }
+          ]
+        }
+      }
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "b98bed6290827de9c961",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Invoice"
+              }
+            },
+            "Property": "Invoice ID"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "280bc16185c2d9e1087f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Invoice"
+              }
+            },
+            "Property": "InvoiceNo"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "17d9416ac6fc54c68c2f",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Invoice"
+              }
+            },
+            "Property": "Invoice Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "8142aa16997424d46cdd",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Invoice"
+              }
+            },
+            "Property": "Due Date"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "190bf18c4a8942335e84",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Customer"
+              }
+            },
+            "Property": "Customer"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "2a36b78ac636398f09a4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Customer"
+              }
+            },
+            "Property": "Country"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "cf80a751464cd5c70982",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "AR Balance"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "86780a88629ab51da8e8",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "Invoiced Value"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "2c2475ad7cea0ec7c730",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Invoice"
+              }
+            },
+            "Property": "Paid Date"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

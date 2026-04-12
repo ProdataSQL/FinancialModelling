@@ -1,0 +1,28 @@
+model Model
+	culture: en-IE
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	discourageImplicitMeasures
+	sourceQueryCulture: en-IE
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_ProTooling = ["DevMode"]
+
+annotation PBI_QueryOrder = ["Invoice","Customer","AR Transactions"]
+
+annotation __TEdtr = 1
+
+ref table Invoice
+ref table Customer
+ref table 'AR Transactions'
+ref table DateAutoTemplate
+ref table Date
+ref table 'Reporting Currency'
+ref table 'Aging Range'
+ref table 'Invoice Status'
+
+ref cultureInfo en-IE
+

@@ -1,0 +1,188 @@
+table Invoice
+	lineageTag: 9993856c-378e-47c2-8273-5b6ec03beeb5
+
+	measure Invoices = DISTINCTCOUNT('AR Transactions'[InvoiceID])
+		formatString: 0
+		lineageTag: 634a9760-996d-4ec8-9d9b-ab7b1f2657b1
+
+	measure 'Qty Opened' = CALCULATE(Invoice[Invoices], USERELATIONSHIP(Invoice[Invoice Date], 'Date'[Date]) )
+		lineageTag: a0d6de47-7584-4a01-99fd-0f6ab18d4137
+
+	measure 'Qty Due' = CALCULATE(Invoice[Invoices], USERELATIONSHIP(Invoice[Due Date], 'Date'[Date]) )
+		formatString: 0
+		lineageTag: 74598881-d3ff-4f78-9041-7fb1fe0c2eaa
+
+	measure 'Qty Paid' = CALCULATE(Invoice[Invoices], USERELATIONSHIP(Invoice[Paid Date], 'Date'[Date]), Invoice[Paid Date]  )
+		formatString: 0
+		lineageTag: 3b491d08-5501-40f5-8063-21c722d4b367
+
+	measure 'Qty Bad Debt' = CALCULATE([Invoices], 'AR Transactions'[Transaction Type] = "BAD_DEBT")
+		formatString: 0
+		displayFolder: _Metrics
+		lineageTag: 3c8382d0-9078-45cf-a866-8ccb12895bc0
+
+	measure 'Bad Debt%' = DIVIDE([Qty Bad Debt], [Invoices])
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: _Metrics
+		lineageTag: 22decb35-5cf5-4469-bf54-3de08ba6e51a
+
+	measure DSO =
+			
+			DIVIDE ([AR Balance], [Daily Sales])
+		displayFolder: _Metrics
+		lineageTag: 11cd64d3-6693-4eee-b07b-9d8fabf6d6de
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Daily Sales' = DIVIDE([Invoiced Value] , [Days])
+		displayFolder: _Metrics
+		lineageTag: d6192299-57b8-423f-a493-692b5e1dd13d
+
+	measure 'On Time %' = ```
+			DIVIDE([Qty On Time], [Qty Late])
+			
+			```
+		formatString: 0%;-0%;0%
+		displayFolder: _Metrics
+		lineageTag: b0e7134d-1af8-45bb-b719-0c629c81f9d2
+
+	measure 'Qty On Time' = ```
+			
+			VAR d = max('Date'[Date])
+			RETURN 
+			CALCULATE([Invoices], Invoice[Paid Date]<= Invoice[Due Date], 'AR Transactions'[Posted Date]< d)
+			```
+		formatString: 0
+		displayFolder: _Metrics
+		lineageTag: bfc65062-d986-4962-985b-ad6b2d48304f
+
+	measure 'Qty Late' = ```
+			VAR d = max('Date'[Date])
+			RETURN 
+			CALCULATE([Invoices], Invoice[Paid Date] > Invoice[Due Date], 'AR Transactions'[Posted Date]<=d)
+			```
+		formatString: 0
+		displayFolder: _Metrics
+		lineageTag: 95a16a5a-9132-45ed-9d9e-d6022d3e23e4
+
+	measure 'Qty Early' =
+			
+			VAR d = max('Date'[Date])
+			RETURN
+			CALCULATE([Invoices], Invoice[Paid Date]< Invoice[Due Date], 'AR Transactions'[Posted Date]<d)
+		formatString: 0
+		displayFolder: _Metrics
+		lineageTag: b44283cb-0e35-427e-bf9d-c3e55100b9f6
+
+	measure 'Early %' = DIVIDE([Qty Early], [Invoices])
+		formatString: 0%;-0%;0%
+		displayFolder: _Metrics
+		lineageTag: 95533da4-745a-4b6f-b4f2-17612da83910
+
+	column 'Invoice ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: a2c4211a-621c-4b81-9ab9-29dd45d2a24b
+		summarizeBy: none
+		sourceColumn: Invoice ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Invoice Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 550821f7-4a0d-4924-85c8-5d47e2087a4b
+		summarizeBy: none
+		sourceColumn: Invoice Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Due Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 498d781e-cb55-416d-a6f6-e594f8335751
+		summarizeBy: none
+		sourceColumn: Due Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: 24269ad3-d177-4cfb-a0fc-84acfde88883
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Amount Local'
+		dataType: double
+		isHidden
+		lineageTag: 979da67d-01e1-4274-81f8-16ec3bb9c2f0
+		summarizeBy: none
+		sourceColumn: Amount Local
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FXRate
+		dataType: double
+		isHidden
+		lineageTag: 1e02ccfa-a26d-48ec-bac1-b6ae6d64bc71
+		summarizeBy: none
+		sourceColumn: FXRate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: d222c4c8-fa1f-4566-9251-e50997723ae2
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column InvoiceNo
+		dataType: string
+		lineageTag: 8dc64aae-a52f-4160-aa9f-fc8afeaa2774
+		summarizeBy: none
+		sourceColumn: InvoiceNo
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Paid Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 8e225264-8fc2-411f-92a7-889eac197949
+		summarizeBy: none
+		sourceColumn: Paid Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition Invoice = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("fkm4vwf6l6zebg4lqrhbtdcmsq-yk26mhmj2qierbejliem4fgyxm.database.fabric.microsoft.com", "FinanceDB-0b96a2f5-158d-41f2-8fbc-bde79e1d4479"),
+				    dbo_Invoice = Source{[Schema="dbo",Item="Invoice"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_Invoice,{{"InvoiceID", "Invoice ID"}, {"CustomerID", "Customer ID"}, {"InvoiceDate", "Invoice Date"}, {"DueDate", "Due Date"}, {"CurrencyCode", "Currency Code"}, {"AmountLocal", "Amount Local"}, {"PaidDate", "Paid Date"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

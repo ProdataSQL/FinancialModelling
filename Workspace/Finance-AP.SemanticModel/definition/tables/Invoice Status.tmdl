@@ -1,0 +1,62 @@
+table 'Invoice Status'
+	lineageTag: 9de47441-c6f2-4c1b-b50a-2de7ab6d1c53
+
+	calculationGroup
+
+		calculationItem Current = ```
+				VAR maxd = MAX('Date'[Date])
+				VAR mind = MIN('Date'[Date])
+				
+				RETURN
+				CALCULATE(
+				    SELECTEDMEASURE(),
+				    
+				 Invoice[Invoice Date] >= mind ,
+				 Invoice[Invoice Date] <= maxd ,
+				 Invoice[Due Date] >= maxd
+				)
+				
+				```
+
+		calculationItem Open = ```
+				VAR maxd = MAX('Date'[Date])
+				VAR mind = MIN('Date'[Date])
+				
+				RETURN
+				CALCULATE(
+				    SELECTEDMEASURE(),
+				    
+				 Invoice[Due Date] >= mind ,
+				 Invoice[Due Date] <= maxd ,
+				 Invoice[Paid Date] <= maxd
+				)
+				
+				```
+
+		calculationItem Paid = ```
+				VAR maxd = MAX('Date'[Date])
+				VAR mind = MIN('Date'[Date])
+				
+				RETURN
+				CALCULATE(
+				    SELECTEDMEASURE(),
+				    
+				 Invoice[Paid Date] >= mind ,
+				 Invoice[Paid Date] <= maxd 
+				
+				)
+				
+				```
+
+	column Status
+		dataType: string
+		lineageTag: 57296ffe-5852-4cc6-844f-9c5c03cf0df4
+		sourceColumn: Name
+		sortByColumn: Ordinal
+
+	column Ordinal
+		dataType: int64
+		isHidden
+		lineageTag: fcd2394f-3625-404c-90f4-c463d18728f9
+		sourceColumn: Ordinal
+

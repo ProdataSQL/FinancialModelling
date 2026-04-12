@@ -1,0 +1,98 @@
+table Date
+	lineageTag: 69b9891a-10ad-49ef-a638-a04c5328418c
+
+	measure Days = COUNTROWS('Date')
+		formatString: 0
+		lineageTag: 9ff1ff26-f820-4f3f-b30f-ae74fb9b241c
+
+	column Date
+		formatString: Short Date
+		lineageTag: 0b77ab9d-d31c-4cb9-9d5a-22d47a120e35
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Date]
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		formatString: 0
+		lineageTag: 8cb0b1af-7310-4917-89af-24441b5e0a1d
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Year]
+
+		annotation SummarizationSetBy = User
+
+	column 'Year Month'
+		lineageTag: 6a375566-77f7-42fe-9a8c-5df5414d46d3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Year Month]
+		sortByColumn: 'Year Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Year Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 894c18e8-55b8-4ad1-ba44-e46615bc88b3
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Year Month Number]
+
+		annotation SummarizationSetBy = User
+
+	column Month
+		lineageTag: eff24f84-b40d-4ddf-a937-01a254a84b11
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Month]
+		sortByColumn: 'Month Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Month Number'
+		isHidden
+		formatString: 0
+		lineageTag: 778e868f-a434-44b2-ab8f-6f099e031484
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Month Number]
+
+		annotation SummarizationSetBy = User
+
+	column 'Day of Week Number'
+		isHidden
+		formatString: 0
+		lineageTag: fd5a84c8-8ff9-4e75-a5ce-3cad8c5e20fc
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Day of Week Number]
+
+		annotation SummarizationSetBy = User
+
+	column 'Day of Week'
+		lineageTag: ba74decf-7586-41c9-8736-b550d7651f51
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[Day of Week]
+		sortByColumn: 'Day of Week Number'
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateWithTransactions
+		isHidden
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: f4ef1984-4ebb-4f80-a7cf-0dd509e71c99
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: DateAutoTemplate[DateWithTransactions]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Date = calculated
+		mode: import
+		source = DateAutoTemplate
+
+	annotation PBI_Id = 64ecc511811b4e46a120f8024788cb9d
+
