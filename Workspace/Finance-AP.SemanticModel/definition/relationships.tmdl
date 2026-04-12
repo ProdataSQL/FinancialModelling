@@ -1,0 +1,23 @@
+relationship AutoDetected_cf60ecb1-c6a5-4879-aa59-2baf16411266
+	fromColumn: 'AR Transactions'.InvoiceID
+	toColumn: Invoice.'Invoice ID'
+
+relationship AutoDetected_8e86cc4b-ac74-48c7-911d-1b58a041ad5f
+	fromColumn: 'AR Transactions'.CustomerID
+	toColumn: Customer.'Customer ID'
+
+relationship b34cc72a-775b-21d4-5f2d-5a10360920b7
+	isActive: false
+	fromColumn: Invoice.'Due Date'
+	toColumn: Date.Date
+
+relationship c0d8f10e-c55f-fd84-3a84-19b64893deee
+	isActive: false
+	fromColumn: Invoice.'Invoice Date'
+	toColumn: Date.Date
+
+relationship 1f4ccdd1-b83c-2aa5-c998-f8d4e66ef2a0
+	isActive: false
+	fromColumn: Invoice.'Paid Date'
+	toColumn: Date.Date
+

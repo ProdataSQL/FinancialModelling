@@ -1,0 +1,50 @@
+table Customer
+	lineageTag: aa025957-6ec6-4fa0-b801-bef5b2dc9600
+
+	column Country
+		dataType: string
+		lineageTag: cc91cce9-d2f0-4c48-a5a6-f148cbc62d34
+		summarizeBy: none
+		sourceColumn: Country
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: 287a3a9f-af32-4a51-b782-98f530e77a34
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Customer ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: af51587e-81f1-4941-991e-9fc8ac9b2a98
+		summarizeBy: none
+		sourceColumn: Customer ID
+
+		annotation SummarizationSetBy = Automatic
+
+	column Customer
+		dataType: string
+		lineageTag: 5b216a6e-5bee-4b9b-b26a-add5cb4e0cf6
+		summarizeBy: none
+		sourceColumn: Customer
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Customer = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("fkm4vwf6l6zebg4lqrhbtdcmsq-yk26mhmj2qierbejliem4fgyxm.database.fabric.microsoft.com", "FinanceDB-0b96a2f5-158d-41f2-8fbc-bde79e1d4479"),
+				    dbo_Customer = Source{[Schema="dbo",Item="Customer"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_Customer,{{"CUstomerName", "Customer"}, {"CustomerID", "Customer ID"}, {"CurrencyCode", "Currency Code"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

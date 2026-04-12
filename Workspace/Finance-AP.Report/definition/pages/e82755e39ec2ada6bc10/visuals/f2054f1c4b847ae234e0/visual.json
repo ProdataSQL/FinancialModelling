@@ -1,0 +1,419 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/item/report/definition/visualContainer/2.8.0/schema.json",
+  "name": "f2054f1c4b847ae234e0",
+  "position": {
+    "x": 10.857965702317056,
+    "y": 417.42845922241128,
+    "z": 3000,
+    "height": 215.95287341275034,
+    "width": 963.94606623903644,
+    "tabOrder": 3000
+  },
+  "visual": {
+    "visualType": "tableEx",
+    "query": {
+      "queryState": {
+        "Values": {
+          "projections": [
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "Customer"
+                    }
+                  },
+                  "Property": "Customer"
+                }
+              },
+              "queryRef": "Customer.Customer",
+              "nativeQueryRef": "Customer"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "Document No"
+                }
+              },
+              "queryRef": "AR Transactions.Document No",
+              "nativeQueryRef": "Document No"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "Transaction Type"
+                }
+              },
+              "queryRef": "AR Transactions.Transaction Type",
+              "nativeQueryRef": "Transaction Type"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "Currency Code"
+                }
+              },
+              "queryRef": "AR Transactions.Currency Code",
+              "nativeQueryRef": "Currency Code"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "AR Balance Local"
+                }
+              },
+              "queryRef": "AR Transactions.AR Balance Local",
+              "nativeQueryRef": "AR Balance Local"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "FXRate"
+                }
+              },
+              "queryRef": "AR Transactions.FXRate",
+              "nativeQueryRef": "FXRate"
+            },
+            {
+              "field": {
+                "Measure": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "AR Balance EUR"
+                }
+              },
+              "queryRef": "AR Transactions.AR Balance EUR",
+              "nativeQueryRef": "AR Balance EUR"
+            },
+            {
+              "field": {
+                "Column": {
+                  "Expression": {
+                    "SourceRef": {
+                      "Entity": "AR Transactions"
+                    }
+                  },
+                  "Property": "Posted Date"
+                }
+              },
+              "queryRef": "AR Transactions.Posted Date",
+              "nativeQueryRef": "Posted Date"
+            }
+          ]
+        }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "AR Transactions"
+                  }
+                },
+                "Property": "Posted Date"
+              }
+            },
+            "direction": "Ascending"
+          }
+        ]
+      }
+    },
+    "visualContainerObjects": {
+      "title": [
+        {
+          "properties": {
+            "show": {
+              "expr": {
+                "Literal": {
+                  "Value": "true"
+                }
+              }
+            },
+            "text": {
+              "expr": {
+                "Literal": {
+                  "Value": "'Unrealized FX Gain/Loss'"
+                }
+              }
+            },
+            "background": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#252423'"
+                    }
+                  }
+                }
+              }
+            },
+            "fontColor": {
+              "solid": {
+                "color": {
+                  "expr": {
+                    "Literal": {
+                      "Value": "'#FFFFFF'"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "drillFilterOtherVisuals": true
+  },
+  "filterConfig": {
+    "filters": [
+      {
+        "name": "e88e53fcdda2148c9a5a",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "Transaction Type"
+          }
+        },
+        "type": "Categorical",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "a",
+              "Entity": "AR Transactions",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "In": {
+                  "Expressions": [
+                    {
+                      "Column": {
+                        "Expression": {
+                          "SourceRef": {
+                            "Source": "a"
+                          }
+                        },
+                        "Property": "Transaction Type"
+                      }
+                    }
+                  ],
+                  "Values": [
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'FX_REALISED'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'FX_REVERSAL'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'INVOICE'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'PAYMENT'"
+                        }
+                      }
+                    ],
+                    [
+                      {
+                        "Literal": {
+                          "Value": "'FX_REVAL'"
+                        }
+                      }
+                    ]
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "d4ed703f02c7dc0b2cc4",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "Posted Date"
+          }
+        },
+        "type": "Advanced",
+        "filter": {
+          "Version": 2,
+          "From": [
+            {
+              "Name": "a",
+              "Entity": "AR Transactions",
+              "Type": 0
+            }
+          ],
+          "Where": [
+            {
+              "Condition": {
+                "Comparison": {
+                  "ComparisonKind": 4,
+                  "Left": {
+                    "Column": {
+                      "Expression": {
+                        "SourceRef": {
+                          "Source": "a"
+                        }
+                      },
+                      "Property": "Posted Date"
+                    }
+                  },
+                  "Right": {
+                    "DateSpan": {
+                      "Expression": {
+                        "Literal": {
+                          "Value": "datetime'2026-03-31T00:00:00'"
+                        }
+                      },
+                      "TimeUnit": 5
+                    }
+                  }
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "name": "89d3fedf47286e25ebaf",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "Customer"
+              }
+            },
+            "Property": "Customer"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "575d4964272e6e4540f5",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "Document No"
+          }
+        },
+        "type": "Categorical"
+      },
+      {
+        "name": "5a12241c9ee29da3646a",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "AR Balance Local"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "0150e207c4306d02014b",
+        "field": {
+          "Measure": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "AR Balance EUR"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "60031b43e1e0211a0c58",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "FXRate"
+          }
+        },
+        "type": "Advanced"
+      },
+      {
+        "name": "f0c1e0773b32cd98dc54",
+        "field": {
+          "Column": {
+            "Expression": {
+              "SourceRef": {
+                "Entity": "AR Transactions"
+              }
+            },
+            "Property": "Currency Code"
+          }
+        },
+        "type": "Categorical"
+      }
+    ]
+  }
+}

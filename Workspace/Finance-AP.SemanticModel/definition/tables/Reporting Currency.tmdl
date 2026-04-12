@@ -1,0 +1,24 @@
+table 'Reporting Currency'
+	lineageTag: 570189ac-d7a7-434d-a921-bc7abaa74f78
+
+	column 'Reporting Currency'
+		lineageTag: 871167f4-f2cb-4d03-8f7f-3b9528b6b758
+		summarizeBy: none
+		sourceColumn: [Currency]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Reporting Currency' = calculated
+		mode: import
+		source =
+				
+				DATATABLE (
+				    "Currency", STRING,
+				    {
+				        { "Local" },
+				        { "Euro" }
+				    }
+				)
+
+	annotation PBI_Id = 66fcd17998094131b9e7348cd3ccd6b4
+

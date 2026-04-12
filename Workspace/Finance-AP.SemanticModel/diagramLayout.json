@@ -1,0 +1,190 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 568.79998779296875,
+        "y": 206.39999389648438
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 200.93370834414117,
+            "y": 366.17625452679249
+          },
+          "nodeIndex": "Invoice",
+          "nodeLineageTag": "9993856c-378e-47c2-8273-5b6ec03beeb5",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 688.09404440175138,
+            "y": 112.03886248847732
+          },
+          "nodeIndex": "Customer",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1099.0940444017515,
+            "y": 232.08812726339625
+          },
+          "nodeIndex": "DateAutoTemplate",
+          "nodeLineageTag": "823ce05d-a1bf-4687-9ef9-1579993e9d07",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1.0000000000000142,
+            "y": 0
+          },
+          "nodeIndex": "AR Transactions",
+          "nodeLineageTag": "0dc715d8-c3e9-4cae-aaa0-5157a07355c5",
+          "size": {
+            "height": 330,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 708.9999885559082,
+            "y": 483.39999389648438
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "69b9891a-10ad-49ef-a638-a04c5328418c",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1537.0940444017515,
+            "y": 236.08812726339625
+          },
+          "nodeIndex": "Reporting Currency",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1820.0940444017515,
+            "y": 236.08812726339625
+          },
+          "nodeIndex": "Aging Range",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 2103.0940444017515,
+            "y": 272.08812726339625
+          },
+          "nodeIndex": "Invoice Status",
+          "nodeLineageTag": "9de47441-c6f2-4c1b-b50a-2de7ab6d1c53",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    },
+    {
+      "ordinal": 1,
+      "scrollPosition": {
+        "x": 0,
+        "y": 0
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 226.20000076293945,
+            "y": 0
+          },
+          "nodeIndex": "Invoice",
+          "nodeLineageTag": "9993856c-378e-47c2-8273-5b6ec03beeb5",
+          "size": {
+            "height": 729,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 506.20000076293945,
+            "y": 189
+          },
+          "nodeIndex": "AR Transactions",
+          "nodeLineageTag": "0dc715d8-c3e9-4cae-aaa0-5157a07355c5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 1
+        },
+        {
+          "location": {
+            "x": 798.20000076293945,
+            "y": 0
+          },
+          "nodeIndex": "Customer",
+          "nodeLineageTag": "aa025957-6ec6-4fa0-b801-bef5b2dc9600",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 0,
+            "y": 23
+          },
+          "nodeIndex": "Date",
+          "nodeLineageTag": "69b9891a-10ad-49ef-a638-a04c5328418c",
+          "size": {
+            "height": 296,
+            "width": 145
+          },
+          "zIndex": 3
+        }
+      ],
+      "name": "AR",
+      "zoomValue": 100,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "AR",
+  "defaultDiagram": "All tables"
+}

@@ -1,0 +1,190 @@
+table 'AR Transactions'
+	lineageTag: 0dc715d8-c3e9-4cae-aaa0-5157a07355c5
+
+	measure 'AR Balance Local' =
+			
+			VAR d =
+			    MAX ( 'Date'[Date] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'AR Transactions'[AmountLocal] ),
+			        'AR Transactions'[Posted Date] <= d
+			    )
+		lineageTag: b71a3b2a-90b4-4297-bd2b-e620fac2154e
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Balance EUR' =
+			
+			VAR d =
+			    MAX ( 'Date'[Date] )
+			RETURN
+			    CALCULATE (
+			        SUM ( 'AR Transactions'[AmountEUR] ),
+			        'AR Transactions'[Posted Date] <= d
+			    )
+		lineageTag: fdea2a2a-6ca2-4072-a8b8-8c46cf73cc56
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'AR Balance' = ```
+			
+			VAR d =
+			    MAX ( 'Date'[Date] )
+			VAR MinDue =
+			    d - MAX ( 'Aging Range'[Max] )
+			VAR MaxDue =
+			    d - MIN ( 'Aging Range'[Min] )
+			RETURN
+			    CALCULATE (
+			        SWITCH (
+			            SELECTEDVALUE ( 'Reporting Currency'[Reporting Currency] ),
+			            "Local", [AR Balance Local],
+			            [AR Balance EUR]
+			        ),
+			        'AR Transactions'[Posted Date] <= d,
+			   KEEPFILTERS (  'Invoice'[Due Date] >= MinDue       && 'Invoice'[Due Date] <= MaxDue
+			    )
+			    )
+			
+			```
+		lineageTag: 459d89c6-7c00-432c-b9df-d18fe19de817
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Invoiced Value' = CALCULATE([AR Balance], 'AR Transactions'[Transaction Type] = "INVOICE")
+		lineageTag: ec9aab99-96e4-4971-9646-e11573cc3fc0
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Overdue = ```
+			
+			var d = max('Date'[Date])
+			RETURN 
+			CALCULATE([Outstanding]
+			, Invoice[Due Date]<=d
+			)
+			```
+		lineageTag: 9dc15dc7-6124-4a02-a67d-bbec9055d3f7
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure Outstanding = [AR Balance]
+		lineageTag: 6b3d289e-3063-4fe6-9978-e239e7d2e6db
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column 'Transaction ID'
+		dataType: int64
+		formatString: 0
+		lineageTag: 68389129-b7cd-45ef-b7e5-74d5d16039d4
+		summarizeBy: none
+		sourceColumn: Transaction ID
+
+		annotation SummarizationSetBy = User
+
+	column InvoiceID
+		dataType: int64
+		formatString: 0
+		lineageTag: ef14917a-c48b-4aef-9a8c-f55cf85343a3
+		summarizeBy: none
+		sourceColumn: InvoiceID
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posted Date'
+		dataType: dateTime
+		formatString: Short Date
+		lineageTag: 41f6952e-fa13-4c84-a9c8-4ba06993a55e
+		summarizeBy: none
+		sourceColumn: Posted Date
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column 'Transaction Type'
+		dataType: string
+		lineageTag: 3dfb799c-bacd-4a3f-93de-88a777d5a9ec
+		summarizeBy: none
+		sourceColumn: Transaction Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Posted Type'
+		dataType: string
+		lineageTag: 4acaec47-448f-43ef-87c0-46e8cc26ae9b
+		summarizeBy: none
+		sourceColumn: Posted Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Currency Code'
+		dataType: string
+		lineageTag: da1eb3b6-246e-4f5f-8ae4-0a3ca08b46ad
+		summarizeBy: none
+		sourceColumn: Currency Code
+
+		annotation SummarizationSetBy = Automatic
+
+	column AmountLocal
+		dataType: double
+		lineageTag: e727dd13-5a33-4c70-8c9b-e2280375bc0d
+		summarizeBy: none
+		sourceColumn: AmountLocal
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column FXRate
+		dataType: double
+		lineageTag: b96ee430-8c88-4fe7-958d-023dc6903996
+		summarizeBy: none
+		sourceColumn: FXRate
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column AmountEUR
+		dataType: double
+		lineageTag: 9559bd6c-e047-4408-bdc6-69b11732b91e
+		summarizeBy: none
+		sourceColumn: AmountEUR
+
+		annotation SummarizationSetBy = User
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CustomerID
+		dataType: int64
+		formatString: 0
+		lineageTag: ed1c8f95-6b5c-40aa-98dd-3f884463c830
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		annotation SummarizationSetBy = User
+
+	column 'Document No'
+		dataType: string
+		lineageTag: 9f0e1ce7-c05b-456b-83e0-7060091ac870
+		summarizeBy: none
+		sourceColumn: Document No
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'AR Transactions' = m
+		mode: import
+		source =
+				let
+				    Source = Sql.Database("fkm4vwf6l6zebg4lqrhbtdcmsq-yk26mhmj2qierbejliem4fgyxm.database.fabric.microsoft.com", "FinanceDB-0b96a2f5-158d-41f2-8fbc-bde79e1d4479"),
+				    dbo_ARTransaction = Source{[Schema="dbo",Item="ARTransaction"]}[Data],
+				    #"Renamed Columns" = Table.RenameColumns(dbo_ARTransaction,{{"ARTransactionID", "Transaction ID"}, {"PostedDate", "Posted Date"}, {"DocumentNo", "Document No"}, {"TransactionType", "Transaction Type"}, {"PostedType", "Posted Type"}, {"CurrencyCode", "Currency Code"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
