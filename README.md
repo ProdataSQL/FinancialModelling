@@ -21,7 +21,7 @@ If you have a large/complex project and want help with the modelling you can als
   [Files Folder](./Files)
 
 - **Sample GL files to create AR SQLDB Data**  
-  [Files Folder]("./Files/AR Scripts")
+  [Files Folder](./Files/AR%20Scripts/)
 
 - **Sample business rules spreadsheet (GL → Statement mapping)**  
   [Statement.xlsx](./Files/Statement.xlsx)
