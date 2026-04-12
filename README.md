@@ -11,10 +11,10 @@ If you have a large/complex project and want help with the modelling you can als
 
 ## Contents
 
-- **Sample Power BI PBIX with P&L, BS and CF **  
+- **Sample Power BI PBIX with P&L, BS and CF**  
   [Finance-GL.pbix](./Files/Finance-GL.pbix)
 
-- **Sample Power BI PBIX for AR Modelling **  
+- **Sample Power BI PBIX for AR Modelling**  
   [Finance-AR.pbix](./Files/Finance-AR.pbix)
 
 - **Sample GL files to import into Power BI (General Ledger & Transactions)**  
