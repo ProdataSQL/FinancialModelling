@@ -12,16 +12,16 @@ If you have a large/complex project and want help with the modelling you can als
 ## Contents
 
 - **Sample Power BI PBIX with P&L, BS and CF **  
-  [Finance-GL.pbip](./Files/Finance-GL.pbix)
+  [Finance-GL.pbix](./Files/Finance-GL.pbix)
 
-  - **Sample Power BI PBIX for AR Modelling **  
-  [Finance-AR.pbip](./Files/Finance-AR.pbix)
+- **Sample Power BI PBIX for AR Modelling **  
+  [Finance-AR.pbix](./Files/Finance-AR.pbix)
 
 - **Sample GL files to import into Power BI (General Ledger & Transactions)**  
   [Files Folder](./Files)
 
-- **Sample GL files to create AR SQLDB Data **  
-  [Files Folder](./Files/AR Scripts)
+- **Sample GL files to create AR SQLDB Data**  
+  [Files Folder]("./Files/AR Scripts")
 
 - **Sample business rules spreadsheet (GL → Statement mapping)**  
   [Statement.xlsx](./Files/Statement.xlsx)
