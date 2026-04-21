@@ -143,6 +143,23 @@
             }
           ]
         }
+      },
+      "sortDefinition": {
+        "sort": [
+          {
+            "field": {
+              "Column": {
+                "Expression": {
+                  "SourceRef": {
+                    "Entity": "Invoice"
+                  }
+                },
+                "Property": "Paid Date"
+              }
+            },
+            "direction": "Descending"
+          }
+        ]
       }
     },
     "drillFilterOtherVisuals": true

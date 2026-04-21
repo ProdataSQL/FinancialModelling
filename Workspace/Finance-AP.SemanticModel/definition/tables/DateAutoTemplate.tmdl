@@ -106,7 +106,8 @@ table DateAutoTemplate
 				        MAXX (
 				            {
 				                MAX ( 'AR Transactions'[Posted Date] ),
-				                MAX ( 'Invoice'[Due Date] )
+				                MAX ( 'Invoice'[Due Date] ),
+				                  MAX ( 'Invoice'[Paid Date] )
 				            },
 				            [Value]
 				        )
